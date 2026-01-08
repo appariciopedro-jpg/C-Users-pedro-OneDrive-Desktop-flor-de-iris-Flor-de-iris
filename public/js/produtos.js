@@ -177,9 +177,25 @@ function renderCards(lista) {
 
     const btn = card.querySelector('.btn-card');
     btn.onclick = function() {
-      const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-      carrinho.push(p);
-      localStorage.setItem('carrinho', JSON.stringify(carrinho));
+      let carrinho = [];
+
+      // Lê o carrinho atual com segurança (evita quebrar em alguns navegadores mobile)
+      try {
+        const raw = localStorage.getItem('carrinho');
+        carrinho = raw ? JSON.parse(raw) : [];
+        if (!Array.isArray(carrinho)) carrinho = [];
+      } catch {
+        carrinho = [];
+      }
+
+      // Tenta salvar no localStorage; em modo privado de alguns celulares pode falhar
+      try {
+        carrinho.push(p);
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+      } catch {
+        alert('Não foi possível salvar o carrinho neste navegador. Tente sair do modo privado ou usar outro navegador.');
+        return;
+      }
 
       btn.classList.add('btn-adicionado');
       btn.innerHTML = `
@@ -196,7 +212,11 @@ function renderCards(lista) {
       }, 2000);
 
       if (typeof atualizarCarrinho === 'function') {
-        atualizarCarrinho();
+        try {
+          atualizarCarrinho();
+        } catch {
+          // ignora erro de contador para não quebrar o clique
+        }
       }
     };
   });
