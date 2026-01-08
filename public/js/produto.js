@@ -72,9 +72,17 @@
   async function carregarProdutosFonte() {
     // Tenta reaproveitar produtos do localStorage (caso já tenham sido carregados em produtos.js)
     try {
-      const cache = localStorage.getItem('produtosLoja');
-      if (cache) {
-        const lista = JSON.parse(cache);
+      // chave usada na listagem de produtos
+      const cacheLista = localStorage.getItem('produtos');
+      if (cacheLista) {
+        const lista = JSON.parse(cacheLista);
+        if (Array.isArray(lista) && lista.length) return lista;
+      }
+
+      // chave antiga usada apenas nesta página (compatibilidade)
+      const cacheAntigo = localStorage.getItem('produtosLoja');
+      if (cacheAntigo) {
+        const lista = JSON.parse(cacheAntigo);
         if (Array.isArray(lista) && lista.length) return lista;
       }
     } catch (e) {
@@ -88,6 +96,8 @@
       const dados = await resp.json();
       if (Array.isArray(dados)) {
         try {
+          // mantém as duas chaves para compatibilidade
+          localStorage.setItem('produtos', JSON.stringify(dados));
           localStorage.setItem('produtosLoja', JSON.stringify(dados));
         } catch {}
         return dados;
