@@ -1,17 +1,14 @@
-/* Logo maior e mais premium */
+/* Logo na home usando o mesmo tamanho das demais páginas */
 .page-home .logo-container {
   display: flex;
   align-items: center;
-  height: 90px;
-  min-width: 260px;
-  max-width: 350px;
 }
 
 .page-home .logo-svg {
-  width: 100% !important;
-  height: 90px !important;
-  max-width: 350px;
-  min-width: 220px;
+  width: 80px;
+  height: 80px;
+  border-radius: 999px;
+  object-fit: cover;
   display: block;
 }
 /* Agrupamento dos ícones do topo: lupa, perfil, WhatsApp */
