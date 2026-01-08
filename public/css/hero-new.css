@@ -472,7 +472,27 @@
 
 @media (max-width: 768px) {
   .hero-index--revamp {
-    padding: 100px 0 60px;
+    padding: 90px 0 50px;
+  }
+
+  .hero-container-centered {
+    padding: 0 20px;
+  }
+
+  .hero-mega-title {
+    font-size: 3rem;
+  }
+
+  .hero-mega-title .gradient-text {
+    font-size: 4rem;
+  }
+
+  .hero-mega-title .title-line-3 {
+    font-size: 2rem;
+  }
+
+  .hero-premium-description {
+    font-size: 1.05rem;
   }
 }
 
