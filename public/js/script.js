@@ -316,6 +316,9 @@ function mostrarMenuUsuario() {
     <a href="perfil.html#pedidos" style="display:block;padding:12px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
       Meus pedidos
     </a>
+    <a href="index.html#sobre" style="display:block;padding:12px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
+      Sobre a Flor de Íris
+    </a>
     <a href="#" id="menu-rastreio-link" style="display:block;padding:12px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
       Rastrear pedidos ▸
     </a>
@@ -327,6 +330,24 @@ function mostrarMenuUsuario() {
         Ajuda com rastreio (WhatsApp)
       </a>
     </div>
+    <div style="padding:10px 15px 6px 15px;font-size:0.78em;color:#999;text-transform:uppercase;letter-spacing:0.08em;border-top:1px solid rgba(0,0,0,0.06);margin-top:6px;">
+      Categorias
+    </div>
+    <a href="produtos.html?cat=hidratante" style="display:block;padding:10px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
+      Hidratantes
+    </a>
+    <a href="produtos.html?cat=esfoliante" style="display:block;padding:10px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
+      Esfoliantes
+    </a>
+    <a href="produtos.html?cat=aromatico" style="display:block;padding:10px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
+      Aromáticos
+    </a>
+    <a href="produtos.html?cat=vegano" style="display:block;padding:10px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
+      Veganos
+    </a>
+    <a href="produtos.html?cat=premium" style="display:block;padding:10px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
+      Linha Premium
+    </a>
     <a href="#" onclick="fazerLogoutMenu(event)" style="display:block;padding:12px 15px;color:#f44336;text-decoration:none;border-radius:8px;transition:all 0.2s;">
       Sair
     </a>

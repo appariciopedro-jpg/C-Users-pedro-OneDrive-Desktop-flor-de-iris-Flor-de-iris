@@ -41,6 +41,38 @@
           <button type="submit" class="btn-submit" id="btn-login">Entrar</button>
         </form>
 
+        <!-- RECUPERAR CONTA / ESQUECI A SENHA -->
+        <div class="link-recuperar">
+          <button type="button" class="btn-link-recuperar" onclick="toggleRecuperacao()">
+            Esqueci minha senha / recuperar conta
+          </button>
+        </div>
+
+        <form id="form-recuperar" class="auth-form" novalidate>
+          <div class="form-group">
+            <label>CPF cadastrado</label>
+            <input type="text" id="rec-cpf" placeholder="000.000.000-00" maxlength="14" inputmode="numeric" autocomplete="off">
+          </div>
+
+          <div class="form-group">
+            <label>Nova senha</label>
+            <div class="password-row">
+              <input type="password" id="rec-senha" placeholder="Crie uma nova senha" minlength="6" autocomplete="new-password">
+              <button type="button" class="btn-toggle-senha" id="toggle-rec-senha" onclick="toggleSenha('rec-senha','toggle-rec-senha')">Mostrar</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Confirmar nova senha</label>
+            <div class="password-row">
+              <input type="password" id="rec-confirma-senha" placeholder="Confirme a nova senha" autocomplete="new-password">
+              <button type="button" class="btn-toggle-senha" id="toggle-rec-confirma" onclick="toggleSenha('rec-confirma-senha','toggle-rec-confirma')">Mostrar</button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit" id="btn-recuperar">Recuperar conta</button>
+        </form>
+
         <!-- FORMULÁRIO DE REGISTRO -->
         <form id="form-registro" class="auth-form" novalidate>
           <div class="foto-perfil-container">

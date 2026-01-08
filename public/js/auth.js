@@ -4,6 +4,7 @@ console.log('Auth.js carregado');
 document.addEventListener('DOMContentLoaded', () => {
   const formLogin = document.getElementById('form-login');
   const formRegistro = document.getElementById('form-registro');
+  const formRecuperar = document.getElementById('form-recuperar');
 
   if (formLogin) {
     formLogin.addEventListener('submit', fazerLogin);
@@ -11,6 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (formRegistro) {
     formRegistro.addEventListener('submit', fazerRegistro);
+  }
+
+  if (formRecuperar) {
+    formRecuperar.addEventListener('submit', recuperarConta);
   }
 });
 
@@ -50,8 +55,21 @@ function previewFoto(event) {
 // Formatar CPF
 document.addEventListener('DOMContentLoaded', () => {
   const cpfInput = document.getElementById('reg-cpf');
+  const recCpfInput = document.getElementById('rec-cpf');
   if (cpfInput) {
     cpfInput.addEventListener('input', (e) => {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length <= 11) {
+        value = value.replace(/(\d{3})(\d)/, '$1.$2');
+        value = value.replace(/(\d{3})(\d)/, '$1.$2');
+        value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+        e.target.value = value;
+      }
+    });
+  }
+
+  if (recCpfInput) {
+    recCpfInput.addEventListener('input', (e) => {
       let value = e.target.value.replace(/\D/g, '');
       if (value.length <= 11) {
         value = value.replace(/(\d{3})(\d)/, '$1.$2');
@@ -111,6 +129,25 @@ function toggleSenha(inputId, buttonId) {
   const isPassword = input.type === 'password';
   input.type = isPassword ? 'text' : 'password';
   btn.textContent = isPassword ? 'Ocultar' : 'Mostrar';
+}
+
+// Alternar entre login e recuperação de conta
+function toggleRecuperacao() {
+  const formLogin = document.getElementById('form-login');
+  const formRecuperar = document.getElementById('form-recuperar');
+  if (!formLogin || !formRecuperar) return;
+
+  const mostrandoRecuperar = formRecuperar.classList.contains('active');
+
+  if (mostrandoRecuperar) {
+    formRecuperar.classList.remove('active');
+    formLogin.classList.add('active');
+  } else {
+    formLogin.classList.remove('active');
+    formRecuperar.classList.add('active');
+  }
+
+  esconderMensagem();
 }
 
 // Validar CPF
@@ -241,14 +278,18 @@ function fazerRegistro(event) {
   
   // Verificar se usuário ou CPF já existe
   const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-  
-  const usuarioExiste = usuarios.find(u => 
-    u.usuario.toLowerCase() === usuario.toLowerCase() || 
-    u.cpf.replace(/\D/g, '') === cpf.replace(/\D/g, '')
-  );
-  
+  const cpfLimpo = cpf.replace(/\D/g, '');
+
+  const cpfJaExiste = usuarios.find(u => (u.cpf || '').replace(/\D/g, '') === cpfLimpo);
+  if (cpfJaExiste) {
+    mostrarMensagem('Já existe uma conta com este CPF.', 'erro');
+    setLoading('btn-registro', false);
+    return;
+  }
+
+  const usuarioExiste = usuarios.find(u => u.usuario.toLowerCase() === usuario.toLowerCase());
   if (usuarioExiste) {
-    mostrarMensagem('Usuário ou CPF já cadastrado.', 'erro');
+    mostrarMensagem('Este nome de usuário já está em uso.', 'erro');
     setLoading('btn-registro', false);
     return;
   }
@@ -293,6 +334,69 @@ function fazerRegistro(event) {
   }, 2000);
 }
 
+// Recuperar conta (alterar senha usando CPF)
+function recuperarConta(event) {
+  event.preventDefault();
+  console.log('Tentando recuperar conta...');
+
+  setLoading('btn-recuperar', true, 'Atualizando...');
+
+  const cpf = document.getElementById('rec-cpf').value.trim();
+  const novaSenha = document.getElementById('rec-senha').value;
+  const confirmaSenha = document.getElementById('rec-confirma-senha').value;
+
+  if (!cpf || !novaSenha || !confirmaSenha) {
+    mostrarMensagem('Preencha todos os campos para recuperar sua conta.', 'erro');
+    setLoading('btn-recuperar', false);
+    return;
+  }
+
+  if (!validarCPF(cpf)) {
+    mostrarMensagem('CPF inválido.', 'erro');
+    setLoading('btn-recuperar', false);
+    return;
+  }
+
+  if (novaSenha.length < 6) {
+    mostrarMensagem('A nova senha deve ter no mínimo 6 caracteres.', 'erro');
+    setLoading('btn-recuperar', false);
+    return;
+  }
+
+  if (novaSenha !== confirmaSenha) {
+    mostrarMensagem('As senhas não coincidem.', 'erro');
+    setLoading('btn-recuperar', false);
+    return;
+  }
+
+  const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+  const cpfLimpo = cpf.replace(/\D/g, '');
+
+  const usuarioEncontrado = usuarios.find(u => (u.cpf || '').replace(/\D/g, '') === cpfLimpo);
+
+  if (!usuarioEncontrado) {
+    mostrarMensagem('Não encontramos nenhuma conta com este CPF.', 'erro');
+    setLoading('btn-recuperar', false);
+    return;
+  }
+
+  usuarioEncontrado.senha = novaSenha;
+  localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
+  console.log('Senha atualizada para usuário:', usuarioEncontrado.usuario);
+
+  mostrarMensagem(`Senha atualizada com sucesso. Seu usuário é: ${usuarioEncontrado.usuario}.`, 'sucesso');
+
+  // Limpar formulário de recuperação
+  document.getElementById('form-recuperar').reset();
+
+  // Voltar para o login após alguns segundos
+  setTimeout(() => {
+    toggleRecuperacao();
+    setLoading('btn-recuperar', false);
+  }, 2500);
+}
+
 // Verificar se usuário está logado ao carregar página
 function verificarLogin() {
   const usuarioLogado = localStorage.getItem('usuarioLogado');
@@ -312,5 +416,6 @@ window.fazerRegistro = fazerRegistro;
 window.previewFoto = previewFoto;
 window.verificarLogin = verificarLogin;
 window.fazerLogout = fazerLogout;
+window.toggleRecuperacao = toggleRecuperacao;
  
 

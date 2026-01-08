@@ -147,9 +147,21 @@ function renderCards(lista) {
       badgeHTML = '<span class="badge badge-destaque">Premium</span>';
     }
 
-    const tags = (p.tags || '').split(',').filter(t => t.trim());
-    const tagsHTML = tags.slice(0, 3).map(tag => 
-      `<span class="card-tag">${tag.trim()}</span>`
+    const categoriaTexto = (p.categoria || '').trim();
+    const rawTags = (p.tags || '').split(',').map(t => t.trim()).filter(Boolean);
+
+    const allTags = [];
+    if (categoriaTexto) {
+      allTags.push(categoriaTexto);
+    }
+    rawTags.forEach(tag => {
+      if (!allTags.some(t => t.toLowerCase() === tag.toLowerCase())) {
+        allTags.push(tag);
+      }
+    });
+
+    const tagsHTML = allTags.slice(0, 3).map(tag => 
+      `<span class="card-tag">${tag}</span>`
     ).join('');
 
     const card = document.createElement('div');
@@ -229,10 +241,25 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   await carregarProdutosLoja();
+  
+  // Verificar se veio alguma categoria pela URL (?cat=hidratante, esfoliante, etc.)
+  try {
+    const params = new URLSearchParams(window.location.search || '');
+    const catParam = (params.get('cat') || '').trim();
+    if (catParam) {
+      categoriaAtiva = catParam;
+    }
+  } catch {
+    // ignora se URLSearchParams não estiver disponível
+  }
   inicializarCategorias();
   inicializarVisualizacao();
-
-  renderCards(produtos);
+  
+  if (categoriaAtiva && categoriaAtiva !== 'todos') {
+    aplicaFiltros();
+  } else {
+    renderCards(produtos);
+  }
 });
 
 function aplicaFiltros() {
@@ -246,20 +273,37 @@ function aplicaFiltros() {
     const descricao = (p.descricao || "").toLowerCase();
     const preco = Number(p.preco) || 0;
     const tags = (p.tags || '').toLowerCase();
+    const categoriaTexto = (p.categoria || '').toLowerCase();
     
     // Filtro por categoria
     let passaCategoria = true;
     if (categoriaAtiva !== 'todos') {
       if (categoriaAtiva === 'hidratante') {
-        passaCategoria = tags.includes('hidratante');
+        // "Relaxante" é tratado como uma variação de hidratante
+        passaCategoria =
+          tags.includes('hidratante') ||
+          categoriaTexto.includes('hidratante') ||
+          categoriaTexto.includes('relaxante') ||
+          tags.includes('relaxante');
       } else if (categoriaAtiva === 'esfoliante') {
-        passaCategoria = tags.includes('esfoliante');
+        passaCategoria =
+          tags.includes('esfoliante') ||
+          categoriaTexto.includes('esfoliante');
       } else if (categoriaAtiva === 'aromatico') {
-        passaCategoria = tags.includes('aromático') || tags.includes('aromatico');
+        const catNorm = categoriaTexto.normalize('NFD').replace(/\p{Diacritic}/gu, '');
+        const tagsNorm = tags.normalize('NFD').replace(/\p{Diacritic}/gu, '');
+        passaCategoria =
+          tagsNorm.includes('aromatico') ||
+          catNorm.includes('aromatico');
       } else if (categoriaAtiva === 'vegano') {
-        passaCategoria = tags.includes('vegano');
+        passaCategoria =
+          tags.includes('vegano') ||
+          categoriaTexto.includes('vegano');
       } else if (categoriaAtiva === 'premium') {
-        passaCategoria = preco > 30;
+        passaCategoria =
+          preco > 30 ||
+          tags.includes('premium') ||
+          categoriaTexto.includes('premium');
       }
     }
     
