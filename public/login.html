@@ -50,8 +50,8 @@
 
         <form id="form-recuperar" class="auth-form" novalidate>
           <div class="form-group">
-            <label>CPF cadastrado</label>
-            <input type="text" id="rec-cpf" placeholder="000.000.000-00" maxlength="14" inputmode="numeric" autocomplete="off">
+            <label>E-mail cadastrado</label>
+            <input type="email" id="rec-email" placeholder="seuemail@exemplo.com" autocomplete="email">
           </div>
 
           <div class="form-group">
@@ -85,38 +85,43 @@
           </div>
 
           <div class="form-group">
-            <label>Nome Completo *</label>
+            <label>Nome Completo</label>
             <input type="text" id="reg-nome" required placeholder="Seu nome completo">
           </div>
 
           <div class="form-group">
-            <label>Nome de Usuário *</label>
+            <label>Nome de Usuário</label>
             <input type="text" id="reg-usuario" required placeholder="Escolha um nome de usuário">
+          </div>
+
+          <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" id="reg-email" required placeholder="seuemail@exemplo.com" autocomplete="email">
           </div>
 
           <div class="form-row">
             <div class="form-group">
-              <label>CPF *</label>
+              <label>CPF</label>
               <input type="text" id="reg-cpf" required placeholder="000.000.000-00" maxlength="14" inputmode="numeric" autocomplete="off">
             </div>
             <div class="form-group">
-              <label>CEP *</label>
+              <label>CEP</label>
               <input type="text" id="reg-cep" required placeholder="00000-000" maxlength="9" inputmode="numeric" autocomplete="postal-code">
             </div>
           </div>
 
           <div class="form-group">
-            <label>Endereço Completo *</label>
+            <label>Endereço Completo</label>
             <input type="text" id="reg-endereco" required placeholder="Rua, Número, Bairro">
           </div>
 
           <div class="form-row">
             <div class="form-group">
-              <label>Cidade *</label>
+              <label>Cidade</label>
               <input type="text" id="reg-cidade" required placeholder="Sua cidade">
             </div>
             <div class="form-group">
-              <label>UF *</label>
+              <label>UF</label>
               <input type="text" id="reg-uf" required placeholder="SP" maxlength="2" style="text-transform: uppercase;">
             </div>
           </div>
@@ -127,7 +132,7 @@
           </div>
 
           <div class="form-group">
-            <label>Senha *</label>
+            <label>Senha</label>
             <div class="password-row">
               <input type="password" id="reg-senha" required placeholder="Crie uma senha" minlength="6" autocomplete="new-password">
               <button type="button" class="btn-toggle-senha" id="toggle-reg-senha" onclick="toggleSenha('reg-senha','toggle-reg-senha')">Mostrar</button>
@@ -135,7 +140,7 @@
           </div>
 
           <div class="form-group">
-            <label>Confirmar Senha *</label>
+            <label>Confirmar Senha</label>
             <div class="password-row">
               <input type="password" id="reg-confirma-senha" required placeholder="Confirme sua senha" autocomplete="new-password">
               <button type="button" class="btn-toggle-senha" id="toggle-reg-confirma" onclick="toggleSenha('reg-confirma-senha','toggle-reg-confirma')">Mostrar</button>

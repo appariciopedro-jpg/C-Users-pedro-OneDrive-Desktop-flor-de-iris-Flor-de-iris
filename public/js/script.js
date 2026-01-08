@@ -225,13 +225,14 @@ function carregarProdutosDestaque() {
     const precoFormatado = Number(p.preco).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
     const card = document.createElement("div");
     card.className = "card";
+    const pid = encodeURIComponent(p.id || p.nome);
     card.innerHTML = `
       <img src="${p.imagem}" alt="${p.nome}">
       <div class="card-info">
         <h4>${p.nome}</h4>
         <p class="preco">${precoFormatado}</p>
       </div>
-      <a href="produtos.html" class="btn-card">Ver Produto</a>
+      <a href="produto.html?pid=${pid}" class="btn-card">Ver produto e comprar</a>
     `;
     container.appendChild(card);
   });
@@ -243,19 +244,21 @@ function verificarLoginHeader() {
   if (!btnUsuario) return;
   
   const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
-  
+
+  // Sempre abre um menu, mesmo sem login. Login/registro é opcional.
   if (usuarioLogado) {
     btnUsuario.textContent = 'Minha conta';
-    btnUsuario.href = '#';
-    btnUsuario.onclick = (e) => {
-      e.preventDefault();
-      mostrarMenuUsuario();
-    };
   } else {
-    btnUsuario.textContent = 'Entrar';
-    btnUsuario.href = 'login.html';
-    btnUsuario.onclick = null;
+    // Em muitas telas ele aparece como "três pontinhos" via CSS,
+    // aqui só garantimos um texto neutro.
+    btnUsuario.textContent = 'Opções';
   }
+
+  btnUsuario.href = '#';
+  btnUsuario.onclick = (e) => {
+    e.preventDefault();
+    mostrarMenuUsuario();
+  };
 }
 
 // Newsletter (home): salva e-mail localmente e mostra feedback
@@ -299,59 +302,96 @@ try {
 }
 
 function mostrarMenuUsuario() {
-  const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
-  
+  const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
+
   // Criar menu dropdown
   const menu = document.createElement('div');
   menu.style.cssText = 'position:fixed;top:70px;right:20px;background:rgba(255,255,255,0.98);border-radius:14px;box-shadow:0 18px 44px rgba(0,0,0,0.18);padding:10px;z-index:10000;min-width:220px;border:1px solid rgba(0,0,0,0.12);';
-  
-  menu.innerHTML = `
-    <div style="padding:15px;border-bottom:1px solid rgba(0,0,0,0.08);">
-      <div style="font-weight:800;color:rgba(31,31,31,0.92);">${usuarioLogado.nome}</div>
-      <div style="font-size:0.85em;color:#666;margin-top:3px;">@${usuarioLogado.usuario}</div>
-    </div>
-    <a href="perfil.html" style="display:block;padding:12px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
-      Meu perfil
-    </a>
-    <a href="perfil.html#pedidos" style="display:block;padding:12px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
-      Meus pedidos
-    </a>
-    <a href="index.html#sobre" style="display:block;padding:12px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
-      Sobre a Flor de Íris
-    </a>
-    <a href="#" id="menu-rastreio-link" style="display:block;padding:12px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
-      Rastrear pedidos ▸
-    </a>
-    <div id="menu-rastreio-opcoes" style="display:none;padding:4px 0 4px 0;border-radius:8px;">
-      <a href="https://rastreae.com.br/busca" target="_blank" rel="noopener noreferrer" style="display:block;padding:8px 15px 8px 28px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
-        Rastrear no site
+
+  if (usuarioLogado) {
+    // Menu completo para quem já está logado
+    menu.innerHTML = `
+      <div style="padding:15px;border-bottom:1px solid rgba(0,0,0,0.08);">
+        <div style="font-weight:800;color:rgba(31,31,31,0.92);">${usuarioLogado.nome}</div>
+        <div style="font-size:0.85em;color:#666;margin-top:3px;">@${usuarioLogado.usuario}</div>
+      </div>
+      <a href="perfil.html" style="display:block;padding:12px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
+        Meu perfil
       </a>
-      <a href="https://api.whatsapp.com/send/?phone=554498642644&text=Ol%C3%A1,%20preciso%20de%20ajuda%20para%20rastrear%20meu%20pedido" target="_blank" rel="noopener noreferrer" style="display:block;padding:8px 15px 8px 28px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
-        Ajuda com rastreio (WhatsApp)
+      <a href="perfil.html#pedidos" style="display:block;padding:12px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
+        Meus pedidos
       </a>
-    </div>
-    <div style="padding:10px 15px 6px 15px;font-size:0.78em;color:#999;text-transform:uppercase;letter-spacing:0.08em;border-top:1px solid rgba(0,0,0,0.06);margin-top:6px;">
-      Categorias
-    </div>
-    <a href="produtos.html?cat=hidratante" style="display:block;padding:10px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
-      Hidratantes
-    </a>
-    <a href="produtos.html?cat=esfoliante" style="display:block;padding:10px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
-      Esfoliantes
-    </a>
-    <a href="produtos.html?cat=aromatico" style="display:block;padding:10px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
-      Aromáticos
-    </a>
-    <a href="produtos.html?cat=vegano" style="display:block;padding:10px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
-      Veganos
-    </a>
-    <a href="produtos.html?cat=premium" style="display:block;padding:10px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
-      Linha Premium
-    </a>
-    <a href="#" onclick="fazerLogoutMenu(event)" style="display:block;padding:12px 15px;color:#f44336;text-decoration:none;border-radius:8px;transition:all 0.2s;">
-      Sair
-    </a>
-  `;
+      <a href="index.html#sobre" style="display:block;padding:12px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
+        Sobre a Flor de Íris
+      </a>
+      <a href="#" id="menu-rastreio-link" style="display:block;padding:12px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
+        Rastrear pedidos ▸
+      </a>
+      <div id="menu-rastreio-opcoes" style="display:none;padding:4px 0 4px 0;border-radius:8px;">
+        <a href="https://rastreae.com.br/busca" target="_blank" rel="noopener noreferrer" style="display:block;padding:8px 15px 8px 28px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
+          Rastrear no site
+        </a>
+        <a href="https://api.whatsapp.com/send/?phone=554498642644&text=Ol%C3%A1,%20preciso%20de%20ajuda%20para%20rastrear%20meu%20pedido" target="_blank" rel="noopener noreferrer" style="display:block;padding:8px 15px 8px 28px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
+          Ajuda com rastreio (WhatsApp)
+        </a>
+      </div>
+      <div style="padding:10px 15px 6px 15px;font-size:0.78em;color:#999;text-transform:uppercase;letter-spacing:0.08em;border-top:1px solid rgba(0,0,0,0.06);margin-top:6px;">
+        Categorias
+      </div>
+      <a href="produtos.html?cat=hidratante" style="display:block;padding:10px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
+        Hidratantes
+      </a>
+      <a href="produtos.html?cat=esfoliante" style="display:block;padding:10px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
+        Esfoliantes
+      </a>
+      <a href="produtos.html?cat=aromatico" style="display:block;padding:10px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
+        Aromáticos
+      </a>
+      <a href="produtos.html?cat=vegano" style="display:block;padding:10px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
+        Veganos
+      </a>
+      <a href="produtos.html?cat=premium" style="display:block;padding:10px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
+        Linha Premium
+      </a>
+      <a href="#" onclick="fazerLogoutMenu(event)" style="display:block;padding:12px 15px;color:#f44336;text-decoration:none;border-radius:8px;transition:all 0.2s;">
+        Sair
+      </a>
+    `;
+  } else {
+    // Menu para quem NÃO está logado: nada de obrigar login, só opção
+    menu.innerHTML = `
+      <div style="padding:15px 15px 12px 15px;border-bottom:1px solid rgba(0,0,0,0.08);">
+        <div style="font-weight:800;color:rgba(31,31,31,0.92);">Conta opcional</div>
+        <div style="font-size:0.86em;color:#666;margin-top:4px;">
+          Você pode comprar normalmente sem fazer cadastro.
+        </div>
+      </div>
+      <a href="login.html" style="display:block;padding:12px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;font-weight:600;">
+        Entrar ou criar conta (opcional)
+      </a>
+      <a href="index.html#sobre" style="display:block;padding:12px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
+        Sobre a Flor de Íris
+      </a>
+      <div style="padding:10px 15px 6px 15px;font-size:0.78em;color:#999;text-transform:uppercase;letter-spacing:0.08em;border-top:1px solid rgba(0,0,0,0.06);margin-top:6px;">
+        Categorias
+      </div>
+      <a href="produtos.html?cat=hidratante" style="display:block;padding:10px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
+        Hidratantes
+      </a>
+      <a href="produtos.html?cat=esfoliante" style="display:block;padding:10px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
+        Esfoliantes
+      </a>
+      <a href="produtos.html?cat=aromatico" style="display:block;padding:10px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
+        Aromáticos
+      </a>
+      <a href="produtos.html?cat=vegano" style="display:block;padding:10px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
+        Veganos
+      </a>
+      <a href="produtos.html?cat=premium" style="display:block;padding:10px 15px;color:#333;text-decoration:none;border-radius:8px;transition:all 0.2s;">
+        Linha Premium
+      </a>
+    `;
+  }
   
   // Adicionar hover aos links
   menu.querySelectorAll('a').forEach(link => {

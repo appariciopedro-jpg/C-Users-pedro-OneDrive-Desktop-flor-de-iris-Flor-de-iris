@@ -170,17 +170,16 @@ function renderCards(lista) {
 
     card.innerHTML = `
       ${badgeHTML}
-      <div class="card-image">
+      <a class="card-image produto-card-image" href="produto.html?pid=${encodeURIComponent(p.id || p.nome)}" data-id="${p.id || ''}">
         <img src="${p.imagem}" alt="${p.nome}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x400/ff6b6b/ffffff?text=Produto'">
-      </div>
+      </a>
       <div class="card-info">
         <h4>${p.nome}</h4>
-        <p class="card-descricao">${p.descricao || 'Sabonete artesanal feito com ingredientes naturais'}</p>
         ${tagsHTML ? `<div class="card-tags">${tagsHTML}</div>` : ''}
         <span class="preco">${formatPrice(p.preco)}</span>
-        <button class="btn-card" data-index="${i}">
+        <button class="btn-card btn-compre-ja" data-index="${i}">
           <span class="btn-icon" aria-hidden="true"></span>
-          <span>Adicionar ao carrinho</span>
+          <span>Compre já</span>
         </button>
       </div>
     `;
@@ -189,48 +188,35 @@ function renderCards(lista) {
 
     const btn = card.querySelector('.btn-card');
     btn.onclick = function() {
-      let carrinho = [];
+      const preco = Number(p.preco) || 0;
+      const item = {
+        id: p.id || p.nome,
+        nome: p.nome,
+        preco,
+        quantidade: 1,
+        imagem: p.imagem
+      };
 
-      // Lê o carrinho atual com segurança (evita quebrar em alguns navegadores mobile)
-      try {
-        const raw = localStorage.getItem('carrinho');
-        carrinho = raw ? JSON.parse(raw) : [];
-        if (!Array.isArray(carrinho)) carrinho = [];
-      } catch {
-        carrinho = [];
-      }
+      const dadosPagamento = {
+        itens: [item],
+        subtotal: preco,
+        desconto: 0,
+        frete: 0,
+        total: preco,
+        cupom: null,
+        observacao: ''
+      };
 
-      // Tenta salvar no localStorage; em modo privado de alguns celulares pode falhar
       try {
-        carrinho.push(p);
-        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        sessionStorage.setItem('dadosPagamento', JSON.stringify(dadosPagamento));
       } catch {
-        alert('Não foi possível salvar o carrinho neste navegador. Tente sair do modo privado ou usar outro navegador.');
+        alert('Não foi possível preparar o pagamento neste navegador. Tente sair do modo privado ou usar outro navegador.');
         return;
       }
 
-      btn.classList.add('btn-adicionado');
-      btn.innerHTML = `
-        <span class="btn-icon" aria-hidden="true"></span>
-        <span>Adicionado</span>
-      `;
-
-      setTimeout(() => {
-        btn.classList.remove('btn-adicionado');
-        btn.innerHTML = `
-          <span class="btn-icon" aria-hidden="true"></span>
-          <span>Adicionar ao carrinho</span>
-        `;
-      }, 2000);
-
-      if (typeof atualizarCarrinho === 'function') {
-        try {
-          atualizarCarrinho();
-        } catch {
-          // ignora erro de contador para não quebrar o clique
-        }
-      }
+      window.location.href = 'pagamento.html';
     };
+
   });
 }
 

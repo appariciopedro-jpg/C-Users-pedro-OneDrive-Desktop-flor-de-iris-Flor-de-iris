@@ -55,21 +55,8 @@ function previewFoto(event) {
 // Formatar CPF
 document.addEventListener('DOMContentLoaded', () => {
   const cpfInput = document.getElementById('reg-cpf');
-  const recCpfInput = document.getElementById('rec-cpf');
   if (cpfInput) {
     cpfInput.addEventListener('input', (e) => {
-      let value = e.target.value.replace(/\D/g, '');
-      if (value.length <= 11) {
-        value = value.replace(/(\d{3})(\d)/, '$1.$2');
-        value = value.replace(/(\d{3})(\d)/, '$1.$2');
-        value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-        e.target.value = value;
-      }
-    });
-  }
-
-  if (recCpfInput) {
-    recCpfInput.addEventListener('input', (e) => {
       let value = e.target.value.replace(/\D/g, '');
       if (value.length <= 11) {
         value = value.replace(/(\d{3})(\d)/, '$1.$2');
@@ -179,6 +166,18 @@ function validarCPF(cpf) {
   return true;
 }
 
+// Validação simples de e-mail
+function validarEmail(email) {
+  email = String(email || '').trim();
+  if (!email) return false;
+  // Checagem básica: precisa de "@" e um ponto depois
+  const partes = email.split('@');
+  if (partes.length !== 2) return false;
+  if (!partes[0]) return false;
+  if (!partes[1] || !partes[1].includes('.')) return false;
+  return true;
+}
+
 // Fazer Login
 function fazerLogin(event) {
   event.preventDefault();
@@ -242,6 +241,7 @@ function fazerRegistro(event) {
   
   const nome = document.getElementById('reg-nome').value.trim();
   const usuario = document.getElementById('reg-usuario').value.trim();
+  const email = (document.getElementById('reg-email')?.value || '').trim().toLowerCase();
   const cpf = document.getElementById('reg-cpf').value.trim();
   const cep = document.getElementById('reg-cep').value.trim();
   const endereco = document.getElementById('reg-endereco').value.trim();
@@ -252,8 +252,14 @@ function fazerRegistro(event) {
   const confirmaSenha = document.getElementById('reg-confirma-senha').value;
   
   // Validações
-  if (!nome || !usuario || !cpf || !cep || !endereco || !cidade || !uf || !senha) {
-    mostrarMensagem('Preencha todos os campos obrigatórios.', 'erro');
+  if (!nome || !usuario || !email || !cpf || !cep || !endereco || !cidade || !uf || !senha) {
+    mostrarMensagem('Preencha os dados para criar sua conta.', 'erro');
+    setLoading('btn-registro', false);
+    return;
+  }
+
+  if (!validarEmail(email)) {
+    mostrarMensagem('Informe um e-mail válido.', 'erro');
     setLoading('btn-registro', false);
     return;
   }
@@ -287,6 +293,13 @@ function fazerRegistro(event) {
     return;
   }
 
+  const emailJaExiste = usuarios.find(u => (u.email || '').toLowerCase() === email.toLowerCase());
+  if (emailJaExiste) {
+    mostrarMensagem('Já existe uma conta com este e-mail.', 'erro');
+    setLoading('btn-registro', false);
+    return;
+  }
+
   const usuarioExiste = usuarios.find(u => u.usuario.toLowerCase() === usuario.toLowerCase());
   if (usuarioExiste) {
     mostrarMensagem('Este nome de usuário já está em uso.', 'erro');
@@ -303,6 +316,7 @@ function fazerRegistro(event) {
     id: Date.now(),
     nome,
     usuario,
+    email,
     cpf,
     endereco: {
       cep,
@@ -334,25 +348,25 @@ function fazerRegistro(event) {
   }, 2000);
 }
 
-// Recuperar conta (alterar senha usando CPF)
+// Recuperar conta (alterar senha usando e-mail)
 function recuperarConta(event) {
   event.preventDefault();
   console.log('Tentando recuperar conta...');
 
   setLoading('btn-recuperar', true, 'Atualizando...');
 
-  const cpf = document.getElementById('rec-cpf').value.trim();
+  const email = (document.getElementById('rec-email')?.value || '').trim().toLowerCase();
   const novaSenha = document.getElementById('rec-senha').value;
   const confirmaSenha = document.getElementById('rec-confirma-senha').value;
 
-  if (!cpf || !novaSenha || !confirmaSenha) {
+  if (!email || !novaSenha || !confirmaSenha) {
     mostrarMensagem('Preencha todos os campos para recuperar sua conta.', 'erro');
     setLoading('btn-recuperar', false);
     return;
   }
 
-  if (!validarCPF(cpf)) {
-    mostrarMensagem('CPF inválido.', 'erro');
+  if (!validarEmail(email)) {
+    mostrarMensagem('E-mail inválido.', 'erro');
     setLoading('btn-recuperar', false);
     return;
   }
@@ -370,9 +384,7 @@ function recuperarConta(event) {
   }
 
   const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-  const cpfLimpo = cpf.replace(/\D/g, '');
-
-  const usuarioEncontrado = usuarios.find(u => (u.cpf || '').replace(/\D/g, '') === cpfLimpo);
+  const usuarioEncontrado = usuarios.find(u => (u.email || '').toLowerCase() === email);
 
   if (!usuarioEncontrado) {
     mostrarMensagem('Não encontramos nenhuma conta com este CPF.', 'erro');
@@ -417,5 +429,6 @@ window.previewFoto = previewFoto;
 window.verificarLogin = verificarLogin;
 window.fazerLogout = fazerLogout;
 window.toggleRecuperacao = toggleRecuperacao;
+// recuperarConta é usado apenas via listener do formulário
  
 

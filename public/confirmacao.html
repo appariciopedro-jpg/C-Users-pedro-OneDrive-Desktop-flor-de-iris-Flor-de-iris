@@ -49,7 +49,7 @@
 <section class="carrinho-section">
   <div class="carrinho-container">
 
-    <div class="carrinho-resumo" style="grid-template-columns: 1fr;">
+    <div class="carrinho-resumo" style="grid-template-columns: 1fr; gap: 20px;">
       <div class="resumo-card">
         <h3>Informações do pedido</h3>
 
@@ -85,6 +85,33 @@
 
         <p style="margin-top: 12px; font-size: 0.9em; color: #666;">
           Se o código ainda estiver como “—”, ele aparecerá quando o pedido for marcado como <strong>Enviado</strong>.
+        </p>
+      </div>
+      
+      <div class="resumo-card">
+        <h3>Dados de entrega</h3>
+        <div class="resumo-linha">
+          <span>Nome:</span>
+          <span id="confirmacao-cliente-nome">—</span>
+        </div>
+        <div class="resumo-linha">
+          <span>CPF:</span>
+          <span id="confirmacao-cliente-cpf">—</span>
+        </div>
+        <div class="resumo-linha">
+          <span>Endereço:</span>
+          <span id="confirmacao-cliente-endereco">—</span>
+        </div>
+        <div class="resumo-linha">
+          <span>CEP:</span>
+          <span id="confirmacao-cliente-cep">—</span>
+        </div>
+        <div class="resumo-linha">
+          <span>Cidade/UF:</span>
+          <span id="confirmacao-cliente-cidade">—</span>
+        </div>
+        <p style="margin-top: 12px; font-size: 0.9em; color: #666;">
+          Esses são os dados de entrega usados neste pedido.
         </p>
       </div>
     </div>

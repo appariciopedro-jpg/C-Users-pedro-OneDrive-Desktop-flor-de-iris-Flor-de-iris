@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalhe do Produto | Flor de Íris</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=20251231-3">
+  <style>
+    /* Página de detalhes de produto - estilos principais (mobile-first) */
+    .produto-detalhe-section {
+      padding: 30px 16px 80px;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(255, 95, 158, 0.15), transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(120, 200, 255, 0.16), transparent 60%),
+        linear-gradient(180deg, #fffafc 0%, #fff9f4 100%);
+      min-height: calc(100vh - 80px);
+    }
+
+    .produto-detalhe-container {
+      max-width: 1120px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: 28px;
+      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.12);
+      padding: 22px 18px 28px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 95, 158, 0.18);
+    }
+
+    .produto-detalhe-container::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0 0, rgba(167, 139, 250, 0.22), transparent 60%),
+        radial-gradient(circle at 100% 0, rgba(251, 191, 36, 0.18), transparent 60%),
+        radial-gradient(circle at 70% 120%, rgba(240, 101, 149, 0.18), transparent 60%);
+      opacity: 0.45;
+      z-index: 0;
+    }
+
+    .produto-detalhe-container > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .produto-detalhe-voltar {
+      border: none;
+      background: rgba(255, 255, 255, 0.9);
+      color: #6B46C1;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 8px 16px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+      margin-bottom: 18px;
+      backdrop-filter: blur(10px);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .produto-detalhe-voltar:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+      background: rgba(255, 255, 255, 1);
+    }
+
+    .produto-detalhe-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .produto-detalhe-imagem-wrap {
+      border-radius: 24px;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 0%, rgba(167, 139, 250, 0.3), transparent 55%), #f3f0ff;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
+      max-height: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #det-produto-imagem {
+      width: 100%;
+      height: 100%;
+      max-height: 360px;
+      object-fit: cover;
+      transform: scale(1.02);
+      transition: transform 0.6s ease;
+    }
+
+    .produto-detalhe-imagem-wrap:hover #det-produto-imagem {
+      transform: scale(1.06);
+    }
+
+    .produto-detalhe-info {
+      padding: 8px 4px 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .produto-detalhe-info h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      letter-spacing: -0.02em;
+      color: #1a202c;
+    }
+
+    .produto-detalhe-descricao {
+      font-size: 0.98rem;
+      color: #4a5568;
+      line-height: 1.7;
+      margin-top: 4px;
+    }
+
+    .produto-detalhe-preco {
+      margin-top: 10px;
+      font-size: 2.1rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #ff6b6b, #f06595);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .produto-detalhe-acoes {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .produto-detalhe-callout {
+      margin-top: 6px;
+      font-size: 0.9rem;
+      color: #4a5568;
+    }
+
+    .produto-detalhe-info .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+      margin-bottom: 4px;
+    }
+
+    .produto-detalhe-info .card-tags .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: linear-gradient(135deg, rgba(255, 107, 107, 0.08), rgba(240, 101, 149, 0.14));
+      border: 1px solid rgba(255, 107, 107, 0.35);
+      color: #b91c1c;
+    }
+
+    .produto-detalhe-info .btn-compre-ja,
+    .produto-detalhe-info .btn-add-carrinho {
+      width: 100%;
+      padding: 14px 24px;
+      background-size: 200% 200%;
+      color: #fff;
+      border: none;
+      border-radius: 18px;
+      font-weight: 900;
+      font-size: 1rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 14px 32px rgba(255, 107, 107, 0.45);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background-position 0.4s ease;
+    }
+
+    .produto-detalhe-info .btn-compre-ja::before,
+    .produto-detalhe-info .btn-add-carrinho::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .produto-detalhe-info .btn-compre-ja:hover::before,
+    .produto-detalhe-info .btn-add-carrinho:hover::before {
+      left: 100%;
+    }
+
+    .produto-detalhe-info .btn-compre-ja:hover,
+    .produto-detalhe-info .btn-add-carrinho:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(255, 107, 107, 0.6);
+      background-position: 100% 50%;
+    }
+
+    .produto-detalhe-info .btn-compre-ja:active,
+    .produto-detalhe-info .btn-add-carrinho:active {
+      transform: translateY(-1px);
+    }
+
+    .produto-detalhe-info .btn-compre-ja {
+      background: linear-gradient(135deg, #ff6b6b, #f06595);
+      box-shadow: 0 18px 40px rgba(255, 107, 107, 0.65);
+    }
+
+    .produto-detalhe-info .btn-add-carrinho {
+      background: linear-gradient(135deg, #4ade80, #22c55e);
+      box-shadow: 0 14px 32px rgba(34, 197, 94, 0.45);
+    }
+
+    .produto-detalhe-empty {
+      text-align: center;
+      padding: 40px 10px 20px;
+    }
+
+    .produto-detalhe-empty h1 {
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+      color: #2d3748;
+    }
+
+    .produto-detalhe-empty p {
+      color: #718096;
+      font-size: 0.95rem;
+      margin-bottom: 18px;
+    }
+
+    /* Avaliações do produto */
+    .produto-avaliacoes {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(226, 232, 240, 0.9);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .produto-avaliacoes-header h2 {
+      font-size: 1.2rem;
+      color: #2d3748;
+      margin-bottom: 6px;
+    }
+
+    .produto-avaliacoes-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      font-size: 0.9rem;
+      color: #718096;
+    }
+
+    #avaliacoes-media {
+      font-weight: 800;
+      color: #1a202c;
+    }
+
+    #avaliacoes-estrelas {
+      color: #f6ad55;
+      font-size: 1rem;
+      letter-spacing: 1px;
+    }
+
+    #avaliacoes-contagem {
+      font-size: 0.9rem;
+      color: #718096;
+    }
+
+    .produto-avaliacoes-lista {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .avaliacao-item {
+      padding: 12px 12px 10px;
+      border-radius: 14px;
+      background: rgba(248, 250, 252, 0.9);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+    }
+
+    .avaliacao-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .avaliacao-nome {
+      font-weight: 700;
+      color: #2d3748;
+      font-size: 0.95rem;
+    }
+
+    .avaliacao-nota {
+      font-size: 0.9rem;
+      color: #f6ad55;
+    }
+
+    .avaliacao-comentario {
+      font-size: 0.9rem;
+      color: #4a5568;
+      margin-bottom: 4px;
+    }
+
+    .avaliacao-data {
+      font-size: 0.78rem;
+      color: #a0aec0;
+    }
+
+    .produto-avaliacoes-form-card {
+      margin-top: 4px;
+      padding: 14px 12px 12px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.08), rgba(139, 92, 246, 0.08));
+      border: 1px solid rgba(251, 191, 36, 0.26);
+    }
+
+    .produto-avaliacoes-form-card h3 {
+      font-size: 1.05rem;
+      color: #2d3748;
+      margin-bottom: 8px;
+    }
+
+    .produto-avaliacoes-form-card .form-row {
+      margin-bottom: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .produto-avaliacoes-form-card label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #4a5568;
+    }
+
+    .produto-avaliacoes-form-card input,
+    .produto-avaliacoes-form-card select,
+    .produto-avaliacoes-form-card textarea {
+      border-radius: 10px;
+      border: 1px solid rgba(203, 213, 224, 1);
+      padding: 8px 10px;
+      font-size: 0.9rem;
+      resize: vertical;
+    }
+
+    .produto-avaliacoes-form-card textarea {
+      min-height: 60px;
+    }
+
+    .produto-avaliacoes-form-card .btn-avaliar {
+      margin-top: 6px;
+      width: 100%;
+      padding: 10px 18px;
+      font-size: 0.95rem;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #6B46C1, #8B5CF6);
+      box-shadow: 0 10px 24px rgba(107, 70, 193, 0.45);
+    }
+
+    .avaliacao-mensagem {
+      margin-top: 6px;
+      font-size: 0.8rem;
+      color: #4a5568;
+    }
+
+    .produto-avaliacoes-comentarios-titulo {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #2d3748;
+      margin-top: 4px;
+    }
+
+    /* Ajustes extras para telas bem pequenas (celular) */
+    @media (max-width: 480px) {
+      .produto-detalhe-section {
+        padding: 24px 12px 70px;
+      }
+
+      .produto-detalhe-container {
+        padding: 18px 14px 24px;
+        border-radius: 22px;
+      }
+
+      .produto-detalhe-imagem-wrap {
+        max-height: 260px;
+      }
+
+      #det-produto-imagem {
+        max-height: 260px;
+      }
+
+      .produto-detalhe-info h1 {
+        font-size: 1.6rem;
+      }
+
+      .produto-detalhe-preco {
+        font-size: 1.7rem;
+      }
+
+      .produto-detalhe-acoes {
+        gap: 8px;
+      }
+
+      .produto-avaliacoes {
+        margin-top: 22px;
+        padding-top: 18px;
+      }
+
+      .produto-avaliacoes-header h2,
+      .produto-avaliacoes-comentarios-titulo {
+        font-size: 1rem;
+      }
+
+      .avaliacao-item {
+        padding: 10px 10px 8px;
+      }
+
+      .produto-avaliacoes-form-card {
+        padding: 12px 10px 10px;
+      }
+
+      .produto-avaliacoes-form-card input,
+      .produto-avaliacoes-form-card select,
+      .produto-avaliacoes-form-card textarea {
+        font-size: 0.85rem;
+      }
+    }
+
+    /* Responsivo - telas médias e grandes */
+    @media (min-width: 768px) {
+      .produto-detalhe-section {
+        padding: 50px 24px 100px;
+      }
+
+      .produto-detalhe-container {
+        padding: 26px 26px 34px;
+        border-radius: 32px;
+      }
+
+      .produto-detalhe-grid {
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+        gap: 30px;
+      }
+
+      .produto-detalhe-info h1 {
+        font-size: 2.2rem;
+      }
+
+      .produto-detalhe-preco {
+        font-size: 2.5rem;
+      }
+
+      .produto-detalhe-acoes {
+        flex-direction: row;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .produto-detalhe-section {
+        padding: 60px 32px 110px;
+      }
+
+      .produto-detalhe-container {
+        padding: 30px 34px 38px;
+      }
+
+      .produto-detalhe-info h1 {
+        font-size: 2.4rem;
+      }
+
+      .produto-detalhe-preco {
+        font-size: 2.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-content">
+    <a href="index.html" class="logo-container" title="Voltar ao início" style="margin-left:0;display:flex;align-items:center;">
+      <img src="images/Flor de Íris_20260107_072441_0000.jpg" alt="Flor de Íris" class="logo-svg" loading="lazy">
+    </a>
+
+    <div class="header-search" aria-label="Buscar produtos">
+      <form class="header-search-form" action="produtos.html" method="get" role="search">
+        <input class="header-search-input" type="search" name="q" placeholder="Buscar na coleção…" autocomplete="off">
+        <button class="header-search-btn" type="submit">Buscar</button>
+      </form>
+    </div>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="produtos.html" class="active">Produtos</a>
+      <a href="carrinho.html" class="nav-cart">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="9" cy="21" r="1"/>
+          <circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+        </svg>
+        Carrinho <span id="carrinho-count-header" class="carrinho-count">0</span>
+      </a>
+      <a href="#" id="btn-usuario" class="nav-user">Entrar</a>
+    </nav>
+  </div>
+</header>
+
+<main class="produto-detalhe-section">
+  <div class="produto-detalhe-container">
+    <button class="produto-detalhe-voltar" type="button" onclick="window.history.back()">← Voltar</button>
+
+    <div id="produto-detalhe-nao-encontrado" class="produto-detalhe-empty" style="display:none;">
+      <h1>Produto não encontrado</h1>
+      <p>Não encontramos este item. Ele pode ter sido removido ou o link está incorreto.</p>
+      <a href="produtos.html" class="btn-ver-carrinho">Ver outros produtos</a>
+    </div>
+
+    <div id="produto-detalhe" class="produto-detalhe-grid" style="display:none;">
+      <div class="produto-detalhe-imagem-wrap">
+        <img id="det-produto-imagem" src="" alt="Produto" loading="lazy">
+      </div>
+      <div class="produto-detalhe-info">
+        <h1 id="det-produto-nome"></h1>
+        <div id="det-produto-tags" class="card-tags" style="margin:6px 0 10px 0;"></div>
+        <div class="produto-detalhe-preco" id="det-produto-preco"></div>
+        <p class="produto-detalhe-callout">Para comprar rápido este sabonete, clique em <strong>Compre já</strong> e vá direto para o pagamento. <br>Você não precisa criar conta: é só informar seus dados de entrega e pagamento.</p>
+        <div class="produto-detalhe-acoes">
+          <button id="det-btn-compre-ja" class="btn-card btn-compre-ja" type="button">
+            <span class="btn-icon" aria-hidden="true"></span>
+            <span>Compre já</span>
+          </button>
+          <button id="det-btn-adicionar-carrinho" class="btn-card btn-add-carrinho" type="button">
+            <span class="btn-icon" aria-hidden="true">+</span>
+            <span>Adicionar ao carrinho</span>
+          </button>
+        </div>
+        <p id="det-produto-descricao" class="produto-detalhe-descricao"></p>
+      </div>
+    </div>
+    <section class="produto-avaliacoes" aria-label="Avaliações do produto">
+      <div class="produto-avaliacoes-header">
+        <h2>Avaliações de quem já comprou</h2>
+        <div class="produto-avaliacoes-meta">
+          <span id="avaliacoes-media">-</span>
+          <span id="avaliacoes-estrelas">★★★★★</span>
+          <span id="avaliacoes-contagem">Nenhum comentário ainda</span>
+        </div>
+      </div>
+
+      <h3 class="produto-avaliacoes-comentarios-titulo">Comentários</h3>
+      <div id="avaliacoes-lista" class="produto-avaliacoes-lista"></div>
+
+      <div class="produto-avaliacoes-form-card">
+        <h3>Deixe a sua opinião</h3>
+        <form id="avaliacao-form">
+          <div class="form-row">
+            <label for="avaliacao-nome">Seu nome (opcional)</label>
+            <input id="avaliacao-nome" name="nome" placeholder="Como você quer aparecer?">
+          </div>
+          <div class="form-row">
+            <label for="avaliacao-nota">Sua nota</label>
+            <select id="avaliacao-nota" name="nota" required>
+              <option value="">Selecione</option>
+              <option value="5">5 - Maravilhoso</option>
+              <option value="4">4 - Muito bom</option>
+              <option value="3">3 - Bom</option>
+              <option value="2">2 - Regular</option>
+              <option value="1">1 - Não gostei</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="avaliacao-comentario">Comentário</label>
+            <textarea id="avaliacao-comentario" name="comentario" required placeholder="Conte como foi a sua experiência com este sabonete..."></textarea>
+          </div>
+          <button type="submit" class="btn-card btn-avaliar">Enviar avaliação</button>
+          <p id="avaliacao-mensagem" class="avaliacao-mensagem"></p>
+        </form>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="footer" id="contato">
+  <div class="footer-decorative-top"></div>
+  <div class="footer-top">
+    <div class="footer-content">
+      <div class="footer-section footer-brand-col">
+        <div class="footer-logo">
+          <svg width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="footerGradientDet" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#6B46C1;stop-opacity:1" />
+                <stop offset="50%" style="stop-color:#8B5CF6;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#A78BFA;stop-opacity:1" />
+              </linearGradient>
+            </defs>
+            <circle cx="100" cy="70" r="25" fill="url(#footerGradientDet)" opacity="0.8"/>
+            <circle cx="80" cy="95" r="20" fill="url(#footerGradientDet)" opacity="0.6"/>
+            <circle cx="120" cy="95" r="20" fill="url(#footerGradientDet)" opacity="0.6"/>
+            <circle cx="70" cy="120" r="15" fill="url(#footerGradientDet)" opacity="0.5"/>
+            <circle cx="100" cy="125" r="18" fill="url(#footerGradientDet)" opacity="0.5"/>
+            <circle cx="130" cy="120" r="15" fill="url(#footerGradientDet)" opacity="0.5"/>
+            <path d="M 100 130 Q 100 170 100 180" stroke="url(#footerGradientDet)" stroke-width="4" fill="none"/>
+          </svg>
+          <span><span data-site-nome-loja>Flor de Íris</span></span>
+        </div>
+        <p class="footer-description" data-site-footer-desc>Sabonetes artesanais premium feitos com ingredientes 100% naturais.</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-content">
+      <p data-site-footer-copy>© 2025 Flor de Íris - Sabonetes Artesanais. Todos os direitos reservados.</p>
+      <div class="footer-payment-methods">
+        <span>Aceitamos:</span>
+        <span class="payment-icon">PIX</span>
+        <span class="payment-icon">Dinheiro</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/config.js?v=20251231-3"></script>
+<script src="js/rastreio.js?v=20251231-3"></script>
+<script src="js/produto.js?v=20251231-3"></script>
+<script src="js/script.js?v=20251231-3"></script>
+<script src="js/suporte.js?v=20251231-3"></script>
+</body>
+</html>

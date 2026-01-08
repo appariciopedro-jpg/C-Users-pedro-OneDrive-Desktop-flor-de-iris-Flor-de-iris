@@ -44,14 +44,14 @@
         <rect x="14" y="14" width="7" height="7"/>
         <rect x="3" y="14" width="7" height="7"/>
       </svg>
-      Dashboard
+      Resumo rápido
     </button>
     <button class="tab-btn" onclick="mudarAba(event, 'produtos')">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <rect x="2" y="7" width="20" height="14" rx="2"/>
         <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
       </svg>
-      Produtos
+      Produtos da loja
     </button>
     <button class="tab-btn" onclick="mudarAba(event, 'pedidos')">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -59,14 +59,14 @@
         <circle cx="20" cy="21" r="1"/>
         <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
       </svg>
-      Pedidos
+      Pedidos dos clientes
     </button>
     <button class="tab-btn" onclick="mudarAba(event, 'comprovantes')">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
         <circle cx="12" cy="13" r="4"/>
       </svg>
-      Comprovantes
+      Pagamentos (comprovantes)
     </button>
     <button class="tab-btn" onclick="mudarAba(event, 'clientes')">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -75,7 +75,7 @@
         <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
         <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
       </svg>
-      Usuários
+      Clientes cadastrados
     </button>
     <button class="tab-btn" onclick="mudarAba(event, 'relatorios')">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -83,19 +83,23 @@
         <line x1="18" y1="20" x2="18" y2="4"/>
         <line x1="6" y1="20" x2="6" y2="16"/>
       </svg>
-      Relatórios
+      Relatórios de vendas
     </button>
     <button class="tab-btn" onclick="mudarAba(event, 'config')">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <circle cx="12" cy="12" r="3"/>
         <path d="M12 1v6m0 6v6m-6-6h6m6 0h-6"/>
       </svg>
-      Configurações
+      Configurações da loja
     </button>
   </nav>
 
   <!-- ABA: DASHBOARD -->
   <div id="aba-dashboard" class="aba-conteudo active">
+    <section style="padding:12px 20px 0;font-size:0.9rem;color:#e2e8f0;">
+      <strong>Bem-vindo ao painel.</strong>
+      <span>Use este resumo para ver rapidamente quantos produtos você tem, pedidos do dia e movimentação da loja.</span>
+    </section>
     <section class="stats-container">
       <div class="stat-card">
         <div class="stat-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
@@ -227,6 +231,12 @@
   <div id="aba-produtos" class="aba-conteudo">
 
   <section class="painel">
+    <div style="margin-bottom:14px;font-size:0.9rem;color:#e2e8f0;line-height:1.5;">
+      <strong>Como usar esta tela:</strong>
+      <br>1) Preencha o nome, preço, descrição e imagem do sabonete.
+      <br>2) Clique em <strong>Adicionar Produto</strong> para salvar.
+      <br>3) A lista ao lado mostra todos os produtos. Clique em <strong>Editar</strong> para mudar um item ou em <strong>Remover</strong> para apagar.
+    </div>
     <div class="painel-form">
       <h2 id="produto-form-titulo">Adicionar Novo Produto</h2>
       <p id="produto-form-status" class="form-status" aria-live="polite"></p>
@@ -329,6 +339,7 @@
     <section class="pedidos-section">
       <div class="section-header">
         <h2>Pedidos Recebidos</h2>
+        <p style="margin-top:6px;font-size:0.9rem;color:#e2e8f0;max-width:680px;">Aqui aparecem todos os pedidos feitos no site. Use o campo de busca para achar um pedido e, dentro de cada cartão, altere o <strong>Status</strong> (ex: Aguardando pagamento, Pago, Enviado, Concluído).</p>
         <div class="filtros-pedidos">
           <select id="filtro-status-pedido" onchange="filtrarPedidos()">
             <option value="todos">Todos os Status</option>
@@ -364,6 +375,7 @@
     <section class="pedidos-section">
       <div class="section-header">
         <h2>Comprovantes (Pagos)</h2>
+        <p style="margin-top:6px;font-size:0.9rem;color:#e2e8f0;max-width:680px;">Nesta tela você encontra apenas pedidos marcados como <strong>Pago</strong>, com o comprovante de pagamento anexado.</p>
         <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
           <input
             id="filtro-comprovantes"
@@ -386,7 +398,8 @@
   <div id="aba-clientes" class="aba-conteudo">
     <section class="clientes-section">
       <div class="section-header">
-        <h2>Usuários Registrados</h2>
+        <h2>Clientes cadastrados no site</h2>
+        <p style="margin-top:6px;font-size:0.9rem;color:#e2e8f0;max-width:680px;">Aqui aparecem apenas as pessoas que quiseram criar uma conta no site. O cliente pode comprar mesmo sem cadastro.</p>
         <div style="display: flex; gap: 10px;">
           <button class="btn-adicionar" onclick="atualizarListaUsuarios()">
             Atualizar
@@ -403,6 +416,7 @@
   <div id="aba-relatorios" class="aba-conteudo">
     <section class="relatorios-section">
       <h2>Relatórios e Análises</h2>
+      <p style="margin:4px 0 14px;font-size:0.9rem;color:#e2e8f0;max-width:720px;">Use esta parte apenas se quiser ver estatísticas mais avançadas (vendas por período, produtos mais vendidos, categorias). Não é obrigatório para o dia a dia.</p>
       
       <div class="relatorio-card">
         <h3>Vendas por Período</h3>
@@ -432,7 +446,8 @@
   <!-- ABA: CONFIGURAÇÕES -->
   <div id="aba-config" class="aba-conteudo">
     <section class="config-section">
-      <h2>Configurações do Sistema</h2>
+      <h2>Configurações da loja</h2>
+      <p style="margin:4px 0 14px;font-size:0.9rem;color:#e2e8f0;max-width:720px;">Aqui você altera textos do site (nome da loja, WhatsApp, PIX, frases da home, redes sociais). Preencha com calma e clique em <strong>Salvar Configurações</strong> no final.</p>
       
       <div class="config-card">
         <h3>Informações da Loja</h3>

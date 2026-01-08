@@ -86,6 +86,11 @@
     const pedidoIdEl = document.getElementById('confirmacao-pedido-id');
     const statusEl = document.getElementById('confirmacao-status');
     const codigoEl = document.getElementById('confirmacao-codigo');
+    const nomeClienteEl = document.getElementById('confirmacao-cliente-nome');
+    const cpfClienteEl = document.getElementById('confirmacao-cliente-cpf');
+    const enderecoClienteEl = document.getElementById('confirmacao-cliente-endereco');
+    const cepClienteEl = document.getElementById('confirmacao-cliente-cep');
+    const cidadeClienteEl = document.getElementById('confirmacao-cliente-cidade');
     const btnCopiar = document.getElementById('btn-copiar-codigo-rastreio-confirmacao');
     const btnAbrirRastreae = document.getElementById('btn-abrir-rastreae-confirmacao');
 
@@ -111,11 +116,27 @@
     if (!pedido) {
       if (statusEl) statusEl.textContent = 'Pedido não encontrado';
       if (codigoEl) codigoEl.textContent = '—';
+      if (nomeClienteEl) nomeClienteEl.textContent = '—';
+      if (cpfClienteEl) cpfClienteEl.textContent = '—';
+      if (enderecoClienteEl) enderecoClienteEl.textContent = '—';
+      if (cepClienteEl) cepClienteEl.textContent = '—';
+      if (cidadeClienteEl) cidadeClienteEl.textContent = '—';
       if (btnCopiar) btnCopiar.disabled = true;
       return;
     }
 
     if (statusEl) statusEl.textContent = String(pedido.status || '—');
+
+    // Preencher dados de entrega do cliente, se existirem
+    const cliente = pedido.cliente || {};
+    const enderecoLinha = [cliente.endereco, cliente.complemento].filter(Boolean).join(', ');
+    const cidadeUf = [cliente.cidade, cliente.uf].filter(Boolean).join('/');
+
+    if (nomeClienteEl) nomeClienteEl.textContent = cliente.nome || '—';
+    if (cpfClienteEl) cpfClienteEl.textContent = (cliente.cpf || '').toString().trim() || '—';
+    if (enderecoClienteEl) enderecoClienteEl.textContent = enderecoLinha || '—';
+    if (cepClienteEl) cepClienteEl.textContent = (cliente.cep || '').toString().trim() || '—';
+    if (cidadeClienteEl) cidadeClienteEl.textContent = cidadeUf || '—';
 
     const codigo = getCodigoRastreio(pedido);
     if (codigoEl) codigoEl.textContent = codigo || '—';

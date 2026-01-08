@@ -101,16 +101,37 @@
       </p>
     </div>
 
-    <!-- Dados de Entrega -->
+    <!-- Dados de Entrega (editáveis na hora) -->
     <div class="resumo-pedido">
       <h3>Dados de entrega</h3>
       <div id="dados-usuario" class="pay-delivery-box">
-        <p><strong>Nome:</strong> <span id="usuario-nome">-</span></p>
-        <p><strong>CPF:</strong> <span id="usuario-cpf">-</span></p>
-        <p><strong>Endereço:</strong> <span id="usuario-endereco">-</span></p>
-        <p><strong>CEP:</strong> <span id="usuario-cep">-</span></p>
-        <p><strong>Cidade/UF:</strong> <span id="usuario-cidade">-</span></p>
-        <p style="font-size: 0.85em; color: #666; margin-top: 10px;"><a href="login.html" class="pay-delivery-edit">Editar dados do perfil</a></p>
+        <p>
+          <strong>Nome:</strong>
+          <input type="text" id="usuario-nome" placeholder="Seu nome completo" class="pay-delivery-input">
+        </p>
+        <p>
+          <strong>CPF:</strong>
+          <input type="text" id="usuario-cpf" placeholder="000.000.000-00" class="pay-delivery-input" maxlength="14">
+        </p>
+        <p>
+          <strong>Endereço:</strong>
+          <input type="text" id="usuario-endereco" placeholder="Rua, número, bairro" class="pay-delivery-input">
+        </p>
+        <p>
+          <strong>CEP:</strong>
+          <input type="text" id="usuario-cep" placeholder="00000-000" class="pay-delivery-input" maxlength="9">
+        </p>
+        <p>
+          <strong>Cidade:</strong>
+          <input type="text" id="usuario-cidade" placeholder="Sua cidade" class="pay-delivery-input">
+        </p>
+        <p>
+          <strong>UF:</strong>
+          <input type="text" id="usuario-uf" placeholder="SP" class="pay-delivery-input" maxlength="2" style="text-transform: uppercase;">
+        </p>
+        <p style="font-size: 0.85em; color: #666; margin-top: 10px;">
+          Você pode ajustar os dados de entrega aqui apenas para este pedido.
+        </p>
       </div>
     </div>
 

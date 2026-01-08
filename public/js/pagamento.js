@@ -1,17 +1,13 @@
 // Página de Pagamento
 document.addEventListener('DOMContentLoaded', () => {
   
-  // Verificar se usuário está logado
-  const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
+  // Tentar carregar usuário logado (opcional)
+  const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
   
-  if (!usuarioLogado) {
-    alert('Você precisa estar logado para finalizar o pedido.');
-    window.location.href = 'login.html';
-    return;
+  // Se estiver logado, preenche os dados de entrega; se não, segue como convidado
+  if (usuarioLogado) {
+    carregarDadosUsuario(usuarioLogado);
   }
-  
-  // Carregar dados do usuário
-  carregarDadosUsuario(usuarioLogado);
   
   // Elementos
   const itensLista = document.getElementById('itens-lista');
@@ -44,9 +40,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const now = new Date();
     const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-    const usuario = usuarios.find(u => u.id === usuarioLogado.id) || usuarioLogado;
 
-    const endereco = usuario?.endereco || {};
+    let usuario = null;
+    if (usuarioLogado && typeof usuarioLogado.id !== 'undefined') {
+      usuario = usuarios.find(u => u.id === usuarioLogado.id) || usuarioLogado;
+    }
+
+    // Se não houver usuário logado, cria um cliente genérico (compra como convidado)
+    if (!usuario) {
+      usuario = {
+        nome: 'Cliente (convidado)',
+        cpf: '',
+        usuario: 'convidado',
+        endereco: {
+          endereco: '',
+          complemento: '',
+          cep: '',
+          cidade: '',
+          uf: ''
+        }
+      };
+    }
+
+    const endereco = usuario.endereco || {};
+    const entrega = getDadosEntregaFromDom();
+
+    const clienteNome = entrega.nome || usuario.nome;
+    const clienteCpf = entrega.cpf || usuario.cpf;
+    const clienteEndereco = entrega.endereco || endereco.endereco;
+    const clienteComplemento = endereco.complemento || '';
+    const clienteCep = entrega.cep || endereco.cep;
+    const clienteCidade = entrega.cidade || endereco.cidade;
+    const clienteUf = entrega.uf || endereco.uf;
 
     const pedidoBasico = {
       id: Date.now(),
@@ -54,14 +79,14 @@ document.addEventListener('DOMContentLoaded', () => {
       timestamp: Date.now(),
       codigoRastreio: null,
       cliente: {
-        nome: usuario.nome,
-        cpf: usuario.cpf,
+        nome: clienteNome,
+        cpf: clienteCpf,
         usuario: usuario.usuario,
-        endereco: endereco.endereco,
-        complemento: endereco.complemento,
-        cep: endereco.cep,
-        cidade: endereco.cidade,
-        uf: endereco.uf
+        endereco: clienteEndereco,
+        complemento: clienteComplemento,
+        cep: clienteCep,
+        cidade: clienteCidade,
+        uf: clienteUf
       },
       itens: pedidoBase.itens,
       subtotal: pedidoBase.subtotal,
@@ -224,17 +249,40 @@ function getWhatsappDigitsFromConfig() {
   }
 }
 
-// Carregar dados do usuário logado
+// Carregar dados do usuário logado nos campos editáveis de entrega
 function carregarDadosUsuario(usuario) {
   const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-  const dadosCompletos = usuarios.find(u => u.id === usuario.id);
-  
-  if (dadosCompletos) {
-    document.getElementById('usuario-nome').textContent = dadosCompletos.nome;
-    document.getElementById('usuario-cpf').textContent = dadosCompletos.cpf;
-    document.getElementById('usuario-endereco').textContent = `${dadosCompletos.endereco.endereco}${dadosCompletos.endereco.complemento ? ', ' + dadosCompletos.endereco.complemento : ''}`;
-    document.getElementById('usuario-cep').textContent = dadosCompletos.endereco.cep;
-    document.getElementById('usuario-cidade').textContent = `${dadosCompletos.endereco.cidade}/${dadosCompletos.endereco.uf}`;
+  const dadosCompletos = usuarios.find(u => u.id === usuario.id) || usuario;
+  const endereco = dadosCompletos.endereco || {};
+
+  const nomeEl = document.getElementById('usuario-nome');
+  const cpfEl = document.getElementById('usuario-cpf');
+  const endEl = document.getElementById('usuario-endereco');
+  const cepEl = document.getElementById('usuario-cep');
+  const cidEl = document.getElementById('usuario-cidade');
+  const ufEl = document.getElementById('usuario-uf');
+
+  if (nomeEl) nomeEl.value = dadosCompletos.nome || '';
+  if (cpfEl) cpfEl.value = dadosCompletos.cpf || '';
+  if (endEl) endEl.value = endereco.endereco || '';
+  if (cepEl) cepEl.value = endereco.cep || '';
+  if (cidEl) cidEl.value = endereco.cidade || '';
+  if (ufEl) ufEl.value = (endereco.uf || '').toUpperCase();
+}
+
+// Ler dados de entrega digitados na tela (para usar no pedido)
+function getDadosEntregaFromDom() {
+  try {
+    const nome = (document.getElementById('usuario-nome')?.value || '').trim();
+    const cpf = (document.getElementById('usuario-cpf')?.value || '').trim();
+    const endereco = (document.getElementById('usuario-endereco')?.value || '').trim();
+    const cep = (document.getElementById('usuario-cep')?.value || '').trim();
+    const cidade = (document.getElementById('usuario-cidade')?.value || '').trim();
+    const uf = (document.getElementById('usuario-uf')?.value || '').trim().toUpperCase();
+
+    return { nome, cpf, endereco, cep, cidade, uf };
+  } catch {
+    return { nome: '', cpf: '', endereco: '', cep: '', cidade: '', uf: '' };
   }
 }
 
@@ -472,18 +520,12 @@ async function salvarPedidoNoServidor(pedidoCompleto) {
   }
 }
 
-// Enviar pedido (com comprovante) para o painel admin
+// Enviar pedido (com comprovante) para o painel admin (versão antiga - mantida para compatibilidade)
 async function enviarComprovante() {
   const statusBadge = document.getElementById('status-badge');
 
-  // Pegar dados do usuário logado
-  const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
-  
-  if (!usuarioLogado) {
-    alert('Você precisa estar logado.');
-    window.location.href = 'login.html';
-    return;
-  }
+  // Pegar dados do usuário logado (opcional). Se não houver, segue como convidado.
+  const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
 
   if (!comprovanteData) {
     alert('📎 Para enviar o pedido, anexe o comprovante de pagamento.');
@@ -500,13 +542,26 @@ async function enviarComprovante() {
       window.location.href = 'carrinho.html';
   }
   
-  // Buscar dados completos do usuário
+  // Buscar dados completos do usuário, se existir; caso contrário, cria um cliente genérico (convidado)
   const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-  const usuario = usuarios.find(u => u.id === usuarioLogado.id);
-  
+  let usuario = null;
+  if (usuarioLogado && typeof usuarioLogado.id !== 'undefined') {
+    usuario = usuarios.find(u => u.id === usuarioLogado.id) || usuarioLogado;
+  }
+
   if (!usuario) {
-    alert('Erro ao carregar dados do usuário.');
-    return;
+    usuario = {
+      nome: 'Cliente (convidado)',
+      cpf: '',
+      usuario: 'convidado',
+      endereco: {
+        endereco: '',
+        complemento: '',
+        cep: '',
+        cidade: '',
+        uf: ''
+      }
+    };
   }
 
   const dadosPedido = sessionStorage.getItem('dadosPagamento');
@@ -596,7 +651,8 @@ async function enviarComprovante() {
       }
     })();
 
-    const enderecoLinha = `${usuario.endereco.endereco}${usuario.endereco.complemento ? ', ' + usuario.endereco.complemento : ''}`;
+    const entrega = getDadosEntregaFromDom();
+    const enderecoLinha = `${entrega.endereco || usuario.endereco.endereco}${usuario.endereco.complemento ? ', ' + usuario.endereco.complemento : ''}`;
     const itensMsg = (Array.isArray(pedido.itens) ? pedido.itens : []).map((item, i) => {
       const qtd = Number(item.quantidade) || 0;
       const preco = Number(item.preco) || 0;
@@ -662,20 +718,16 @@ function formatPriceBR(valor) {
   const numero = Number(valor) || 0;
   return numero.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
-// Página de Pagamento
+// Página de Pagamento (bloco auxiliar)
 document.addEventListener('DOMContentLoaded', () => {
   
-  // Verificar se usuário está logado
-  const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
+  // Tentar carregar usuário logado (opcional)
+  const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
   
-  if (!usuarioLogado) {
-    alert('Você precisa estar logado para finalizar o pedido.');
-    window.location.href = 'login.html';
-    return;
+  // Se estiver logado, preenche os dados de entrega; se não, segue como convidado
+  if (usuarioLogado) {
+    carregarDadosUsuario(usuarioLogado);
   }
-  
-  // Carregar dados do usuário
-  carregarDadosUsuario(usuarioLogado);
   
   // Elementos
   const itensLista = document.getElementById('itens-lista');
@@ -1199,6 +1251,15 @@ function criarPedidoCompletoApartirPagamento(dadosPagamento, usuario, atualizaca
   const agora = new Date();
   const timestamp = Date.now();
   const endereco = usuario.endereco || {};
+  const entrega = getDadosEntregaFromDom();
+
+  const clienteNome = entrega.nome || usuario.nome;
+  const clienteCpf = entrega.cpf || usuario.cpf;
+  const clienteEndereco = entrega.endereco || endereco.endereco;
+  const clienteComplemento = endereco.complemento || '';
+  const clienteCep = entrega.cep || endereco.cep;
+  const clienteCidade = entrega.cidade || endereco.cidade;
+  const clienteUf = entrega.uf || endereco.uf;
 
   return {
     id: timestamp,
@@ -1206,14 +1267,14 @@ function criarPedidoCompletoApartirPagamento(dadosPagamento, usuario, atualizaca
     timestamp,
     codigoRastreio: null,
     cliente: {
-      nome: usuario.nome,
-      cpf: usuario.cpf,
+      nome: clienteNome,
+      cpf: clienteCpf,
       usuario: usuario.usuario,
-      endereco: endereco.endereco,
-      complemento: endereco.complemento,
-      cep: endereco.cep,
-      cidade: endereco.cidade,
-      uf: endereco.uf
+      endereco: clienteEndereco,
+      complemento: clienteComplemento,
+      cep: clienteCep,
+      cidade: clienteCidade,
+      uf: clienteUf
     },
     itens: dadosPagamento.itens || [],
     subtotal: dadosPagamento.subtotal || 0,
@@ -1237,13 +1298,8 @@ async function enviarComprovante() {
   const statusBadge = document.getElementById('status-badge');
   const btnEnviar = document.getElementById('btn-enviar-comprovante');
 
-  const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
-
-  if (!usuarioLogado) {
-    alert('Você precisa estar logado.');
-    window.location.href = 'login.html';
-    return;
-  }
+  // Tenta usar usuário logado, mas permite seguir como convidado
+  const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
 
   if (!comprovanteData) {
     alert('📎 Para enviar o pedido, anexe o comprovante de pagamento.');
@@ -1259,18 +1315,25 @@ async function enviarComprovante() {
   }
 
   const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-  const usuario = usuarios.find(u => u.id === usuarioLogado.id);
+  let usuario = null;
+  if (usuarioLogado && typeof usuarioLogado.id !== 'undefined') {
+    usuario = usuarios.find(u => u.id === usuarioLogado.id) || usuarioLogado;
+  }
 
+  // Se não houver usuário logado/dados no localStorage, cria um cliente genérico (compra como convidado)
   if (!usuario) {
-    alert('Erro ao carregar dados do usuário.');
-    if (btnEnviar) {
-      btnEnviar.disabled = false;
-      btnEnviar.textContent = 'Enviar pedido';
-    }
-    if (statusBadge) {
-      statusBadge.textContent = 'Aguardando pagamento';
-    }
-    return;
+    usuario = {
+      nome: 'Cliente (convidado)',
+      cpf: '',
+      usuario: 'convidado',
+      endereco: {
+        endereco: '',
+        complemento: '',
+        cep: '',
+        cidade: '',
+        uf: ''
+      }
+    };
   }
 
   const dadosPagamentoStr = sessionStorage.getItem('dadosPagamento');
@@ -1407,7 +1470,8 @@ async function enviarComprovante() {
       }
     })();
 
-    const enderecoLinha = `${usuario.endereco.endereco}${usuario.endereco.complemento ? ', ' + usuario.endereco.complemento : ''}`;
+    const entrega = getDadosEntregaFromDom();
+    const enderecoLinha = `${entrega.endereco || usuario.endereco.endereco}${usuario.endereco.complemento ? ', ' + usuario.endereco.complemento : ''}`;
     const itensMsg = (Array.isArray(dadosPagamento.itens) ? dadosPagamento.itens : []).map((item, i) => {
       const qtd = Number(item.quantidade) || 0;
       const preco = Number(item.preco) || 0;
