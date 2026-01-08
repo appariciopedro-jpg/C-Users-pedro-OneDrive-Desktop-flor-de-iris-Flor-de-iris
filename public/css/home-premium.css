@@ -325,3 +325,39 @@ body.page-home {
   transform: translateY(-2px) !important;
   box-shadow: var(--home-shadow) !important;
 }
+
+/* Layout do header da home no celular (até ~480px) */
+@media (max-width: 480px) {
+  .page-home .header-content {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 8px 10px 6px;
+  }
+
+  /* Bloco da logo ocupando a largura toda */
+  .page-home .header-content > div:first-child {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .page-home .header-icons {
+    width: 100%;
+    margin-left: 0;
+    justify-content: flex-start;
+  }
+
+  .page-home .header nav {
+    width: 100%;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .page-home .header nav a {
+    font-size: 0.9rem;
+  }
+
+  .page-home .nav-whatsapp span {
+    font-size: 0.95rem;
+  }
+}

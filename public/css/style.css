@@ -6542,8 +6542,8 @@ body.admin-dark .header-content {
 }
 
 body.admin-dark .logo-svg {
-  width: 80px;
-  height: 80px;
+  width: 56px;
+  height: 56px;
   border-radius: 999px;
 }
 
@@ -18417,8 +18417,9 @@ body.admin-dark .header-content {
 }
 
 body.admin-dark .logo-svg {
-  width: min(220px, 68vw);
-  height: auto;
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
 }
 
 body.admin-dark .header-actions {
@@ -23642,6 +23643,20 @@ footer .payment-icon:hover {
     font-size: 0.98rem;
   }
 
+  /* Títulos e textos mais compactos em seções longas */
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .section-subtitle,
+  .beneficios > p,
+  .ingredientes-naturais > p,
+  .processo-fabricacao > p,
+  .depoimentos > p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
   .hero-cta-buttons,
   .hero-actions {
     flex-direction: column;
@@ -23657,7 +23672,7 @@ footer .payment-icon:hover {
 
   /* Seções de produtos / carrinho mais estreitas e botões maiores */
   .produtos-section {
-    padding: 40px 16px 60px;
+    padding: 28px 12px 40px;
   }
 
   .produtos-toolbar {
@@ -23673,7 +23688,7 @@ footer .payment-icon:hover {
   }
 
   .carrinho-section {
-    padding: 60px 12px 50px;
+    padding: 40px 10px 36px;
     overflow: visible;
   }
 
@@ -23692,13 +23707,13 @@ footer .payment-icon:hover {
    }
 
   .perfil-container {
-    margin: 80px 10px 40px;
-    padding: 16px;
+    margin: 40px 10px 24px;
+    padding: 14px;
   }
 
   .pagamento-container {
-    margin: 80px 10px 30px;
-    padding: 18px;
+    margin: 40px 10px 24px;
+    padding: 14px;
   }
 
   button,
