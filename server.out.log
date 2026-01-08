@@ -1,0 +1,324 @@
+
+🔍 DEBUG - Estrutura de diretórios:
+📁 __dirname: C:\Users\pedro\OneDrive\Desktop\flor-de-iris\Flor-de-iris
+📁 process.cwd(): C:\Users\pedro\OneDrive\Desktop\flor-de-iris\Flor-de-iris
+📂 Arquivos em __dirname: [
+  '.gitignore',
+  'database.db',
+  'DEPLOY-RENDER.md',
+  'node_modules',
+  'package-lock.json',
+  'package.json',
+  'public',
+  'README.md',
+  'SEGURANCA.md',
+  'server.err.log',
+  'server.js',
+  'server.out.log'
+]
+✅ Pasta public encontrada em: C:\Users\pedro\OneDrive\Desktop\flor-de-iris\Flor-de-iris\public
+📂 Arquivos em public: [
+  'admin.html',    'carrinho.html',
+  'css',           'images',
+  'index.html',    'js',
+  'login.html',    'pagamento.html',
+  'painel.html',   'perfil.html',
+  'produtos.html', 'videos'
+]
+
+
+==================================================
+🌸 Servidor Flor de Íris rodando em http://localhost:3001
+==================================================
+🛡️  Sistema de Segurança Ativo:
+   ✓ Rate Limiting: 60 req/min por IP
+   ✓ Bloqueio automático: 15 minutos
+   ✓ Headers de segurança configurados
+   ✓ Proteção XSS ativa
+   ✓ Proteção contra clickjacking
+   ✓ Logging de requisições
+==================================================
+[2025-12-30T18:15:28.500Z] ::ffff:127.0.0.1 - GET /index.html
+[2025-12-30T18:16:36.065Z] ::ffff:127.0.0.1 - GET /index.html?id=540f3be4-eeba-471e-b36c-8d374d951a43&vscodeBrowserReqId=1767118596058
+[2025-12-30T18:17:24.055Z] ::ffff:127.0.0.1 - GET /produtos.html
+[2025-12-30T18:18:06.182Z] ::1 - GET /produtos.html
+[2025-12-30T18:18:06.330Z] ::1 - GET /css/style.css
+[2025-12-30T18:18:06.343Z] ::1 - GET /js/config.js
+[2025-12-30T18:18:06.344Z] ::1 - GET /js/produtos.js
+[2025-12-30T18:18:06.345Z] ::1 - GET /js/script.js
+[2025-12-30T18:18:06.345Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:18:12.555Z] ::1 - GET /index.html
+[2025-12-30T18:18:12.624Z] ::1 - GET /css/style.css
+[2025-12-30T18:18:12.638Z] ::1 - GET /images/hero-sabonetes.svg
+[2025-12-30T18:18:12.639Z] ::1 - GET /js/config.js
+[2025-12-30T18:18:12.640Z] ::1 - GET /js/script.js
+[2025-12-30T18:18:12.641Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:18:34.250Z] ::1 - GET /painel.html
+[2025-12-30T18:18:34.323Z] ::1 - GET /css/style.css
+[2025-12-30T18:18:34.329Z] ::1 - GET /js/config.js
+[2025-12-30T18:18:34.330Z] ::1 - GET /js/security.js
+[2025-12-30T18:18:34.330Z] ::1 - GET /js/painel.js
+[2025-12-30T18:18:34.339Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:18:38.052Z] ::1 - GET /admin.html
+[2025-12-30T18:18:38.210Z] ::1 - GET /css/style.css
+[2025-12-30T18:18:38.213Z] ::1 - GET /js/config.js
+[2025-12-30T18:18:38.217Z] ::1 - GET /js/security.js
+[2025-12-30T18:18:38.218Z] ::1 - GET /js/admin.js
+[2025-12-30T18:18:39.561Z] ::1 - GET /painel.html
+[2025-12-30T18:18:39.623Z] ::1 - GET /css/style.css
+[2025-12-30T18:18:39.624Z] ::1 - GET /js/config.js
+[2025-12-30T18:18:39.625Z] ::1 - GET /js/security.js
+[2025-12-30T18:18:39.626Z] ::1 - GET /js/painel.js
+[2025-12-30T18:18:39.628Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:21:04.881Z] ::ffff:127.0.0.1 - GET /painel.html
+[2025-12-30T18:24:02.931Z] ::ffff:127.0.0.1 - GET /painel.html
+[2025-12-30T18:25:56.525Z] ::ffff:127.0.0.1 - GET /painel.html
+[2025-12-30T18:26:20.183Z] ::1 - GET /painel.html
+[2025-12-30T18:26:20.256Z] ::1 - GET /css/style.css
+[2025-12-30T18:26:20.269Z] ::1 - GET /js/config.js
+[2025-12-30T18:26:20.271Z] ::1 - GET /js/security.js
+[2025-12-30T18:26:20.272Z] ::1 - GET /js/painel.js
+[2025-12-30T18:26:20.273Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:26:56.030Z] ::1 - GET /index.html
+[2025-12-30T18:26:56.099Z] ::1 - GET /css/style.css
+[2025-12-30T18:26:56.101Z] ::1 - GET /images/hero-sabonetes.svg
+[2025-12-30T18:26:56.103Z] ::1 - GET /js/config.js
+[2025-12-30T18:26:56.104Z] ::1 - GET /js/script.js
+[2025-12-30T18:26:56.105Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:26:57.510Z] ::1 - GET /produtos.html
+[2025-12-30T18:26:57.582Z] ::1 - GET /css/style.css
+[2025-12-30T18:26:57.583Z] ::1 - GET /js/config.js
+[2025-12-30T18:26:57.592Z] ::1 - GET /js/produtos.js
+[2025-12-30T18:26:57.593Z] ::1 - GET /js/script.js
+[2025-12-30T18:26:57.596Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:27:12.257Z] ::1 - GET /perfil.html
+[2025-12-30T18:27:12.323Z] ::1 - GET /css/style.css
+[2025-12-30T18:27:12.338Z] ::1 - GET /js/config.js
+[2025-12-30T18:27:12.339Z] ::1 - GET /js/perfil.js
+[2025-12-30T18:27:14.431Z] ::1 - GET /perfil.html
+[2025-12-30T18:27:14.497Z] ::1 - GET /css/style.css
+[2025-12-30T18:27:14.498Z] ::1 - GET /js/config.js
+[2025-12-30T18:27:14.499Z] ::1 - GET /js/perfil.js
+[2025-12-30T18:27:15.121Z] ::1 - GET /perfil.html
+[2025-12-30T18:27:15.178Z] ::1 - GET /css/style.css
+[2025-12-30T18:27:15.180Z] ::1 - GET /js/config.js
+[2025-12-30T18:27:15.183Z] ::1 - GET /js/perfil.js
+[2025-12-30T18:27:15.762Z] ::1 - GET /perfil.html
+[2025-12-30T18:27:15.816Z] ::1 - GET /css/style.css
+[2025-12-30T18:27:15.823Z] ::1 - GET /js/config.js
+[2025-12-30T18:27:15.824Z] ::1 - GET /js/perfil.js
+[2025-12-30T18:27:17.038Z] ::1 - GET /carrinho.html
+[2025-12-30T18:27:17.105Z] ::1 - GET /css/style.css
+[2025-12-30T18:27:17.106Z] ::1 - GET /js/config.js
+[2025-12-30T18:27:17.107Z] ::1 - GET /js/carrinho.js
+[2025-12-30T18:27:17.109Z] ::1 - GET /js/script.js
+[2025-12-30T18:27:17.109Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:27:22.490Z] ::1 - GET /produtos.html
+[2025-12-30T18:27:22.560Z] ::1 - GET /css/style.css
+[2025-12-30T18:27:22.562Z] ::1 - GET /js/config.js
+[2025-12-30T18:27:22.563Z] ::1 - GET /js/produtos.js
+[2025-12-30T18:27:22.564Z] ::1 - GET /js/script.js
+[2025-12-30T18:27:22.565Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:27:26.196Z] ::1 - GET /carrinho.html
+[2025-12-30T18:27:26.271Z] ::1 - GET /css/style.css
+[2025-12-30T18:27:26.273Z] ::1 - GET /js/config.js
+[2025-12-30T18:27:26.274Z] ::1 - GET /js/carrinho.js
+[2025-12-30T18:27:26.274Z] ::1 - GET /js/script.js
+[2025-12-30T18:27:26.275Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:27:38.865Z] ::1 - GET /pagamento.html
+[2025-12-30T18:27:38.928Z] ::1 - GET /css/style.css
+[2025-12-30T18:27:38.930Z] ::1 - GET /js/config.js
+[2025-12-30T18:27:38.931Z] ::1 - GET /js/pagamento.js
+[2025-12-30T18:32:44.465Z] ::1 - GET /login.html
+[2025-12-30T18:32:44.522Z] ::1 - GET /css/style.css
+[2025-12-30T18:32:44.523Z] ::1 - GET /js/config.js
+[2025-12-30T18:32:44.524Z] ::1 - GET /js/auth.js
+[2025-12-30T18:32:48.640Z] ::1 - GET /index.html
+[2025-12-30T18:32:48.690Z] ::1 - GET /css/style.css
+[2025-12-30T18:32:48.691Z] ::1 - GET /images/hero-sabonetes.svg
+[2025-12-30T18:32:48.693Z] ::1 - GET /js/config.js
+[2025-12-30T18:32:48.694Z] ::1 - GET /js/script.js
+[2025-12-30T18:32:48.696Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:32:51.198Z] ::1 - GET /produtos.html
+[2025-12-30T18:32:51.274Z] ::1 - GET /css/style.css
+[2025-12-30T18:32:51.275Z] ::1 - GET /js/config.js
+[2025-12-30T18:32:51.276Z] ::1 - GET /js/produtos.js
+[2025-12-30T18:32:51.277Z] ::1 - GET /js/script.js
+[2025-12-30T18:32:51.278Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:32:52.972Z] ::1 - GET /carrinho.html
+[2025-12-30T18:32:53.040Z] ::1 - GET /css/style.css
+[2025-12-30T18:32:53.040Z] ::1 - GET /js/config.js
+[2025-12-30T18:32:53.044Z] ::1 - GET /js/carrinho.js
+[2025-12-30T18:32:53.047Z] ::1 - GET /js/script.js
+[2025-12-30T18:32:53.049Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:32:54.809Z] ::1 - GET /pagamento.html
+[2025-12-30T18:32:54.894Z] ::1 - GET /css/style.css
+[2025-12-30T18:32:54.898Z] ::1 - GET /js/config.js
+[2025-12-30T18:32:54.899Z] ::1 - GET /js/pagamento.js
+[2025-12-30T18:32:57.179Z] ::1 - GET /login.html
+[2025-12-30T18:32:57.226Z] ::1 - GET /css/style.css
+[2025-12-30T18:32:57.227Z] ::1 - GET /js/config.js
+[2025-12-30T18:32:57.227Z] ::1 - GET /js/auth.js
+[2025-12-30T18:33:05.263Z] ::1 - GET /index.html
+[2025-12-30T18:33:05.330Z] ::1 - GET /css/style.css
+[2025-12-30T18:33:05.336Z] ::1 - GET /images/hero-sabonetes.svg
+[2025-12-30T18:33:05.338Z] ::1 - GET /js/config.js
+[2025-12-30T18:33:05.339Z] ::1 - GET /js/script.js
+[2025-12-30T18:33:05.340Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:33:07.456Z] ::1 - GET /perfil.html
+[2025-12-30T18:33:07.538Z] ::1 - GET /css/style.css
+[2025-12-30T18:33:07.539Z] ::1 - GET /js/config.js
+[2025-12-30T18:33:07.539Z] ::1 - GET /js/perfil.js
+[2025-12-30T18:33:37.119Z] ::1 - GET /index.html
+[2025-12-30T18:33:37.192Z] ::1 - GET /css/style.css
+[2025-12-30T18:33:37.208Z] ::1 - GET /images/hero-sabonetes.svg
+[2025-12-30T18:33:37.209Z] ::1 - GET /js/config.js
+[2025-12-30T18:33:37.210Z] ::1 - GET /js/script.js
+[2025-12-30T18:33:37.210Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:34:23.146Z] ::ffff:127.0.0.1 - GET /pagamento.html
+[2025-12-30T18:35:23.869Z] ::1 - GET /index.html
+[2025-12-30T18:35:23.946Z] ::1 - GET /css/style.css
+[2025-12-30T18:35:23.951Z] ::1 - GET /images/hero-sabonetes.svg
+[2025-12-30T18:35:23.954Z] ::1 - GET /js/config.js
+[2025-12-30T18:35:23.955Z] ::1 - GET /js/script.js
+[2025-12-30T18:35:23.955Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:35:39.172Z] ::1 - GET /login.html
+[2025-12-30T18:35:39.244Z] ::1 - GET /css/style.css
+[2025-12-30T18:35:39.266Z] ::1 - GET /js/config.js
+[2025-12-30T18:35:39.267Z] ::1 - GET /js/auth.js
+[2025-12-30T18:35:45.055Z] ::1 - GET /index.html
+[2025-12-30T18:35:45.132Z] ::1 - GET /css/style.css
+[2025-12-30T18:35:45.134Z] ::1 - GET /images/hero-sabonetes.svg
+[2025-12-30T18:35:45.135Z] ::1 - GET /js/config.js
+[2025-12-30T18:35:45.136Z] ::1 - GET /js/script.js
+[2025-12-30T18:35:45.137Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:35:49.764Z] ::1 - GET /produtos.html
+[2025-12-30T18:35:49.856Z] ::1 - GET /css/style.css
+[2025-12-30T18:35:49.857Z] ::1 - GET /js/config.js
+[2025-12-30T18:35:49.858Z] ::1 - GET /js/produtos.js
+[2025-12-30T18:35:49.859Z] ::1 - GET /js/script.js
+[2025-12-30T18:35:49.860Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:35:58.673Z] ::1 - GET /carrinho.html
+[2025-12-30T18:35:58.756Z] ::1 - GET /css/style.css
+[2025-12-30T18:35:58.759Z] ::1 - GET /js/config.js
+[2025-12-30T18:35:58.760Z] ::1 - GET /js/carrinho.js
+[2025-12-30T18:35:58.762Z] ::1 - GET /js/script.js
+[2025-12-30T18:35:58.763Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:36:14.954Z] ::1 - GET /pagamento.html
+[2025-12-30T18:36:15.020Z] ::1 - GET /css/style.css
+[2025-12-30T18:36:15.021Z] ::1 - GET /js/config.js
+[2025-12-30T18:36:15.023Z] ::1 - GET /js/pagamento.js
+[2025-12-30T18:36:58.371Z] ::1 - GET /painel.html
+[2025-12-30T18:36:58.461Z] ::1 - GET /css/style.css
+[2025-12-30T18:36:58.462Z] ::1 - GET /js/config.js
+[2025-12-30T18:36:58.464Z] ::1 - GET /js/security.js
+[2025-12-30T18:36:58.465Z] ::1 - GET /js/painel.js
+[2025-12-30T18:36:58.466Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:37:20.051Z] ::1 - GET /admin.html
+[2025-12-30T18:37:20.144Z] ::1 - GET /css/style.css
+[2025-12-30T18:37:20.154Z] ::1 - GET /js/config.js
+[2025-12-30T18:37:20.154Z] ::1 - GET /js/security.js
+[2025-12-30T18:37:20.155Z] ::1 - GET /js/admin.js
+[2025-12-30T18:37:22.916Z] ::1 - GET /painel.html
+[2025-12-30T18:37:22.979Z] ::1 - GET /css/style.css
+[2025-12-30T18:37:22.980Z] ::1 - GET /js/config.js
+[2025-12-30T18:37:22.981Z] ::1 - GET /js/security.js
+[2025-12-30T18:37:22.982Z] ::1 - GET /js/painel.js
+[2025-12-30T18:37:22.983Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:39:49.016Z] ::1 - GET /index.html
+[2025-12-30T18:39:49.068Z] ::1 - GET /css/style.css
+[2025-12-30T18:39:49.070Z] ::1 - GET /images/hero-sabonetes.svg
+[2025-12-30T18:39:49.071Z] ::1 - GET /js/config.js
+[2025-12-30T18:39:49.071Z] ::1 - GET /js/script.js
+[2025-12-30T18:39:49.073Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:40:23.341Z] ::1 - GET /produtos.html
+[2025-12-30T18:40:23.421Z] ::1 - GET /css/style.css
+[2025-12-30T18:40:23.422Z] ::1 - GET /js/config.js
+[2025-12-30T18:40:23.423Z] ::1 - GET /js/produtos.js
+[2025-12-30T18:40:23.424Z] ::1 - GET /js/script.js
+[2025-12-30T18:40:23.425Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:44:55.158Z] ::ffff:127.0.0.1 - GET /pagamento.html
+[2025-12-30T18:48:38.676Z] ::ffff:127.0.0.1 - GET /painel.html
+[2025-12-30T18:49:30.455Z] ::ffff:127.0.0.1 - GET /painel.html
+[2025-12-30T18:49:55.931Z] ::1 - GET /produtos.html
+[2025-12-30T18:49:56.079Z] ::1 - GET /css/style.css
+[2025-12-30T18:49:56.095Z] ::1 - GET /js/config.js
+[2025-12-30T18:49:56.097Z] ::1 - GET /js/produtos.js
+[2025-12-30T18:49:56.098Z] ::1 - GET /js/script.js
+[2025-12-30T18:49:56.108Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:50:25.634Z] ::1 - GET /carrinho.html
+[2025-12-30T18:50:25.728Z] ::1 - GET /css/style.css
+[2025-12-30T18:50:25.746Z] ::1 - GET /js/config.js
+[2025-12-30T18:50:25.747Z] ::1 - GET /js/carrinho.js
+[2025-12-30T18:50:25.749Z] ::1 - GET /js/script.js
+[2025-12-30T18:50:25.760Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:50:41.004Z] ::1 - GET /produtos.html
+[2025-12-30T18:50:41.129Z] ::1 - GET /css/style.css
+[2025-12-30T18:50:41.146Z] ::1 - GET /js/config.js
+[2025-12-30T18:50:41.148Z] ::1 - GET /js/produtos.js
+[2025-12-30T18:50:41.149Z] ::1 - GET /js/script.js
+[2025-12-30T18:50:41.150Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:50:46.575Z] ::1 - GET /carrinho.html
+[2025-12-30T18:50:46.722Z] ::1 - GET /css/style.css
+[2025-12-30T18:50:46.730Z] ::1 - GET /js/config.js
+[2025-12-30T18:50:46.731Z] ::1 - GET /js/carrinho.js
+[2025-12-30T18:50:46.733Z] ::1 - GET /js/script.js
+[2025-12-30T18:50:46.734Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:50:58.198Z] ::1 - GET /pagamento.html
+[2025-12-30T18:50:58.299Z] ::1 - GET /css/style.css
+[2025-12-30T18:50:58.300Z] ::1 - GET /js/config.js
+[2025-12-30T18:50:58.302Z] ::1 - GET /js/pagamento.js
+[2025-12-30T18:51:21.152Z] ::1 - GET /carrinho.html
+[2025-12-30T18:51:21.356Z] ::1 - GET /css/style.css
+[2025-12-30T18:51:21.359Z] ::1 - GET /js/config.js
+[2025-12-30T18:51:21.371Z] ::1 - GET /js/carrinho.js
+[2025-12-30T18:51:21.374Z] ::1 - GET /js/script.js
+[2025-12-30T18:51:21.376Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:51:33.880Z] ::1 - GET /painel.html
+[2025-12-30T18:51:34.014Z] ::1 - GET /css/style.css
+[2025-12-30T18:51:34.017Z] ::1 - GET /js/config.js
+[2025-12-30T18:51:34.021Z] ::1 - GET /js/security.js
+[2025-12-30T18:51:34.022Z] ::1 - GET /js/painel.js
+[2025-12-30T18:51:34.024Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:52:53.216Z] ::1 - GET /index.html
+[2025-12-30T18:52:53.444Z] ::1 - GET /css/style.css
+[2025-12-30T18:52:53.455Z] ::1 - GET /images/hero-sabonetes.svg
+[2025-12-30T18:52:53.461Z] ::1 - GET /js/config.js
+[2025-12-30T18:52:53.472Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:52:53.474Z] ::1 - GET /js/script.js
+[2025-12-30T18:52:56.753Z] ::1 - GET /produtos.html
+[2025-12-30T18:52:56.983Z] ::1 - GET /css/style.css
+[2025-12-30T18:52:56.995Z] ::1 - GET /js/config.js
+[2025-12-30T18:52:56.998Z] ::1 - GET /js/produtos.js
+[2025-12-30T18:52:57.015Z] ::1 - GET /js/script.js
+[2025-12-30T18:52:57.021Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:53:09.134Z] ::1 - GET /carrinho.html
+[2025-12-30T18:53:09.352Z] ::1 - GET /css/style.css
+[2025-12-30T18:53:09.361Z] ::1 - GET /js/config.js
+[2025-12-30T18:53:09.367Z] ::1 - GET /js/carrinho.js
+[2025-12-30T18:53:09.378Z] ::1 - GET /js/script.js
+[2025-12-30T18:53:09.381Z] ::1 - GET /js/suporte.js
+[2025-12-30T18:53:15.035Z] ::1 - GET /pagamento.html
+[2025-12-30T18:53:15.143Z] ::1 - GET /css/style.css
+[2025-12-30T18:53:15.147Z] ::1 - GET /js/config.js
+[2025-12-30T18:53:15.148Z] ::1 - GET /js/pagamento.js
+[2025-12-30T18:59:53.561Z] ::ffff:127.0.0.1 - GET /pagamento.html
+[2025-12-30T19:00:13.838Z] ::1 - GET /pagamento.html
+[2025-12-30T19:00:13.922Z] ::1 - GET /css/style.css
+[2025-12-30T19:00:13.924Z] ::1 - GET /js/config.js
+[2025-12-30T19:00:13.926Z] ::1 - GET /js/pagamento.js
+[2025-12-30T19:02:55.935Z] ::ffff:127.0.0.1 - GET /pagamento.html
+[2025-12-30T19:02:55.997Z] ::ffff:127.0.0.1 - GET /painel.html
+[2025-12-30T19:04:45.948Z] ::1 - GET /index.html
+[2025-12-30T19:04:46.077Z] ::1 - GET /css/style.css
+[2025-12-30T19:04:46.092Z] ::1 - GET /images/hero-sabonetes.svg
+[2025-12-30T19:04:46.094Z] ::1 - GET /js/config.js
+[2025-12-30T19:04:46.095Z] ::1 - GET /js/script.js
+[2025-12-30T19:04:46.095Z] ::1 - GET /js/suporte.js
+[2025-12-30T19:04:54.531Z] ::1 - GET /carrinho.html
+[2025-12-30T19:04:54.693Z] ::1 - GET /css/style.css
+[2025-12-30T19:04:54.701Z] ::1 - GET /js/config.js
+[2025-12-30T19:04:54.705Z] ::1 - GET /js/carrinho.js
+[2025-12-30T19:04:54.712Z] ::1 - GET /js/script.js
+[2025-12-30T19:04:54.714Z] ::1 - GET /js/suporte.js
+[2025-12-30T19:10:20.840Z] ::1 - GET /api/pedidos

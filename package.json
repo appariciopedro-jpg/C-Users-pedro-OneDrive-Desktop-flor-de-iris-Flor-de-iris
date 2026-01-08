@@ -1,0 +1,28 @@
+{
+  "name": "flor-de-iris",
+  "version": "1.0.0",
+  "description": "E-commerce de sabonetes artesanais Flor de Íris",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "ecommerce",
+    "sabonetes",
+    "artesanal"
+  ],
+  "author": "Flor de Íris",
+  "license": "ISC",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^4.22.1",
+    "express-session": "^1.17.3",
+    "sqlite3": "^5.1.6"
+  }
+}
+

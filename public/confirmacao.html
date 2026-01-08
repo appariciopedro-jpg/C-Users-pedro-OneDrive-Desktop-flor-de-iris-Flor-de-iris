@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Confirmação | Flor de Íris</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=20251231-3">
+</head>
+<body>
+
+<header class="header">
+  <div class="header-content">
+    <a href="index.html" class="logo-container" title="Voltar ao início" style="margin-left:0;">
+      <svg class="logo-svg" width="270" height="80" viewBox="0 0 270 80" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#6B46C1;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#8B5CF6;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#A78BFA;stop-opacity:1" />
+          </linearGradient>
+          <linearGradient id="petalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#A78BFA;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#6B46C1;stop-opacity:1" />
+          </linearGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+
+        <g class="flower-icon">
+          <ellipse cx="20" cy="15" rx="8" ry="12" fill="url(#petalGradient)" transform="rotate(-30 20 30)" opacity="0.9"/>
+          <ellipse cx="35" cy="15" rx="8" ry="12" fill="url(#petalGradient)" transform="rotate(30 35 30)" opacity="0.9"/>
+          <ellipse cx="15" cy="30" rx="8" ry="12" fill="url(#petalGradient)" transform="rotate(-90 15 30)" opacity="0.9"/>
+          <ellipse cx="40" cy="30" rx="8" ry="12" fill="url(#petalGradient)" transform="rotate(90 40 30)" opacity="0.9"/>
+          <ellipse cx="20" cy="45" rx="8" ry="12" fill="url(#petalGradient)" transform="rotate(-150 20 30)" opacity="0.9"/>
+          <ellipse cx="35" cy="45" rx="8" ry="12" fill="url(#petalGradient)" transform="rotate(150 35 30)" opacity="0.9"/>
+
+          <circle cx="27.5" cy="30" r="10" fill="url(#logoGradient)" filter="url(#glow)"/>
+          <circle cx="27.5" cy="30" r="6" fill="#FBBF24" opacity="0.8"/>
+        </g>
+
+        <text x="60" y="28" font-family="'Playfair Display', serif" font-size="20" font-weight="700" fill="url(#logoGradient)" filter="url(#glow)">Flor de</text>
+        <text x="60" y="48" font-family="'Playfair Display', serif" font-size="24" font-weight="800" fill="url(#logoGradient)" letter-spacing="1">ÍRIS</text>
+
+        <path d="M 145 32 Q 150 28, 155 32 Q 150 36, 145 32" fill="url(#petalGradient)" opacity="0.6"/>
+        <circle cx="160" cy="32" r="2" fill="#6B46C1"/>
+      </svg>
+    </a>
+
+    <div class="header-search" aria-label="Buscar produtos">
+      <form class="header-search-form" action="produtos.html" method="get" role="search">
+        <svg class="header-search-icon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2" />
+          <path d="M20 20l-3.5-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        <input class="header-search-input" type="search" name="q" placeholder="Buscar produtos…" autocomplete="off">
+        <button class="header-search-btn" type="submit">Buscar</button>
+      </form>
+    </div>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="produtos.html">Produtos</a>
+      <a href="index.html#sobre">Sobre</a>
+      <a href="carrinho.html" class="nav-cart">Carrinho <span id="carrinho-count-header" class="carrinho-count">0</span></a>
+      <a href="#" id="btn-usuario" class="nav-user">Entrar</a>
+    </nav>
+  </div>
+</header>
+
+<section class="carrinho-hero">
+  <div class="carrinho-hero-content">
+    <h1>Pedido confirmado</h1>
+    <p>Seu pedido foi registrado com sucesso.</p>
+  </div>
+</section>
+
+<section class="carrinho-section">
+  <div class="carrinho-container">
+
+    <div class="carrinho-resumo" style="grid-template-columns: 1fr;">
+      <div class="resumo-card">
+        <h3>Informações do pedido</h3>
+
+        <div class="resumo-linha">
+          <span>Pedido:</span>
+          <span><strong id="confirmacao-pedido-id">—</strong></span>
+        </div>
+
+        <div class="resumo-linha">
+          <span>Status:</span>
+          <span id="confirmacao-status">Carregando...</span>
+        </div>
+
+        <div class="resumo-linha">
+          <span>Código de rastreio:</span>
+          <span id="confirmacao-codigo">—</span>
+        </div>
+
+        <div style="margin-top: 12px; display:flex; gap:10px; flex-wrap:wrap;">
+          <button id="btn-copiar-codigo-rastreio-confirmacao" class="copiar-btn" type="button" style="margin-top:0;">
+            Copiar código
+          </button>
+          <a id="btn-abrir-rastreae-confirmacao" class="copiar-btn" href="https://rastreae.com.br/busca" target="_blank" rel="noopener noreferrer" style="margin-top:0;text-align:center;display:inline-flex;align-items:center;justify-content:center;">
+            Abrir rastreador
+          </a>
+          <button class="copiar-btn" type="button" style="margin-top:0;" onclick="window.location.href='carrinho.html'">
+            Voltar ao carrinho
+          </button>
+          <button class="copiar-btn" type="button" style="margin-top:0;" onclick="window.location.href='index.html'">
+            Ir para o início
+          </button>
+        </div>
+
+        <p style="margin-top: 12px; font-size: 0.9em; color: #666;">
+          Se o código ainda estiver como “—”, ele aparecerá quando o pedido for marcado como <strong>Enviado</strong>.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer id="contato" class="footer">
+  <div class="footer-decorative-top"></div>
+  <div class="footer-content">
+    <div class="footer-col footer-brand-col">
+      <h3><span data-site-nome-loja>Flor de Íris</span></h3>
+      <p class="footer-description" data-site-footer-desc>Sabonetes artesanais feitos com ingredientes 100% naturais para cuidar da sua pele com delicadeza.</p>
+      <div class="footer-badges">
+        <span class="badge-item">Artesanal</span>
+        <span class="badge-item">Natural</span>
+        <span class="badge-item">Sustentável</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Links Rápidos</h4>
+      <a href="index.html" class="footer-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        Início
+      </a>
+      <a href="produtos.html" class="footer-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+        </svg>
+        Produtos
+      </a>
+      <a href="carrinho.html" class="footer-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="9" cy="21" r="1"/>
+          <circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+        </svg>
+        Carrinho
+      </a>
+    </div>
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <a href="https://wa.me/554498642644" class="footer-contact" target="_blank" data-site-whatsapp-link>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        <div>
+          <small>WhatsApp</small>
+          <strong data-site-whatsapp>(44) 9864-2644</strong>
+        </div>
+      </a>
+      <a href="mailto:contato@flordeiris.com" class="footer-contact" data-site-email-link>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+        <div>
+          <small>E-mail</small>
+          <strong data-site-email>contato@flordeiris.com</strong>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-content">
+      <p data-site-footer-copy>&copy; 2025 Flor de Íris. Todos os direitos reservados.</p>
+      <div class="footer-payment-methods">
+        <span>Aceitamos:</span>
+        <span class="payment-icon">PIX</span>
+        <span class="payment-icon">Dinheiro</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Botão WhatsApp -->
+<a href="https://api.whatsapp.com/send/?phone=554498642644&text=Olá! Gostaria de fazer um pedido." 
+   class="whatsapp-btn" 
+   data-site-whatsapp-link
+   data-site-whatsapp-message="Olá! Gostaria de fazer um pedido."
+   target="_blank" 
+   title="Fale conosco no WhatsApp">
+  <svg viewBox="0 0 32 32" width="28" height="28">
+    <path fill="currentColor" d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.737 5.607 2.137 8.048l-2.137 7.952 7.933-2.127c2.42 1.37 5.173 2.127 8.067 2.127 8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 29.467c-2.482 0-4.908-0.646-7.07-1.87l-0.507-0.292-4.713 1.262 1.262-4.669-0.292-0.508c-1.207-2.100-1.847-4.507-1.847-6.924 0-7.384 6.083-13.467 13.467-13.467s13.467 6.083 13.467 13.467-6.083 13.467-13.467 13.467zM21.713 18.313c-0.368-0.184-2.179-1.080-2.517-1.201-0.339-0.122-0.585-0.184-0.831 0.184s-0.954 1.201-1.17 1.448c-0.216 0.245-0.432 0.276-0.8 0.092s-1.56-0.577-2.97-1.838c-1.099-0.982-1.841-2.196-2.057-2.564s-0.023-0.566 0.161-0.749c0.166-0.165 0.368-0.43 0.553-0.645s0.246-0.368 0.368-0.614 0.061-0.46-0.031-0.645-0.831-2.001-1.138-2.741c-0.3-0.722-0.606-0.624-0.831-0.636-0.215-0.010-0.461-0.012-0.707-0.012s-0.645 0.092-0.984 0.46-1.291 1.261-1.291 3.075 1.322 3.567 1.506 3.813 2.596 3.967 6.291 5.564c0.88 0.381 1.567 0.608 2.101 0.778 0.884 0.279 1.688 0.24 2.323 0.145 0.709-0.105 2.179-0.891 2.486-1.751s0.307-1.599 0.215-1.751-0.339-0.245-0.707-0.43z"/>
+  </svg>
+</a>
+
+<script src="js/config.js?v=20251231-3"></script>
+<script src="js/rastreio.js?v=20251231-3"></script>
+<script src="js/confirmacao.js?v=20251231-3"></script>
+<script src="js/script.js?v=20251231-3"></script>
+<script src="js/suporte.js?v=20251231-3"></script>
+
+</body>
+</html>

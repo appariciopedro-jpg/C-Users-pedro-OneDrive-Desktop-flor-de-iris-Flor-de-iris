@@ -1,0 +1,24 @@
+COLOQUE SEU VÍDEO AQUI (FUNDO DO INÍCIO)
+
+O site está configurado para procurar estes arquivos:
+- public/videos/sabonetes-artesanais.mp4
+- (opcional) public/videos/sabonetes-artesanais.webm
+
+Como fazer (rápido):
+1) Baixe um vídeo royalty-free de “sabonete artesanal” / “handmade soap”
+   Sugestões de fontes gratuitas:
+   - Pexels Videos (procure: handmade soap, soap making)
+   - Pixabay Videos (procure: soap, handmade soap)
+2) Renomeie o arquivo baixado para:
+   sabonetes-artesanais.mp4
+3) Cole o arquivo dentro desta pasta:
+   public/videos/
+4) Abra:
+   http://localhost:3001/index.html
+
+Dicas (qualidade + desempenho):
+- Ideal: 720p (1280x720) ou 1080p leve
+- Duração: 10–20s em loop (melhor para não ficar repetitivo)
+- Se o autoplay não funcionar, verifique se está MUTED (o site já deixa muted)
+
+Se quiser usar outro nome/arquivo, é só me dizer o nome e eu ajusto no index.html.

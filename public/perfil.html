@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Perfil - Flor de Íris</title>
+  <link rel="stylesheet" href="css/style.css?v=20251231-3">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-content">
+      <a href="index.html" class="logo-container" title="Voltar ao início" style="margin-left:0;display:flex;align-items:center;">
+        <svg class="logo-svg" width="270" height="80" viewBox="0 0 270 80" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#6B46C1;stop-opacity:1" />
+              <stop offset="50%" style="stop-color:#8B5CF6;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#A78BFA;stop-opacity:1" />
+            </linearGradient>
+            <linearGradient id="petalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#6B46C1;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:1" />
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          <!-- Flor de Íris Estilizada -->
+          <g class="flower-icon">
+            <!-- Pétalas -->
+            <ellipse cx="28" cy="22" rx="12" ry="18" fill="url(#petalGradient)" transform="rotate(-30 28 40)" opacity="0.9"/>
+            <ellipse cx="48" cy="22" rx="12" ry="18" fill="url(#petalGradient)" transform="rotate(30 48 40)" opacity="0.9"/>
+            <ellipse cx="20" cy="40" rx="12" ry="18" fill="url(#petalGradient)" transform="rotate(-90 20 40)" opacity="0.9"/>
+            <ellipse cx="56" cy="40" rx="12" ry="18" fill="url(#petalGradient)" transform="rotate(90 56 40)" opacity="0.9"/>
+            <ellipse cx="28" cy="58" rx="12" ry="18" fill="url(#petalGradient)" transform="rotate(-150 28 40)" opacity="0.9"/>
+            <ellipse cx="48" cy="58" rx="12" ry="18" fill="url(#petalGradient)" transform="rotate(150 48 40)" opacity="0.9"/>
+            <!-- Centro da flor -->
+            <circle cx="38" cy="40" r="15" fill="url(#logoGradient)" filter="url(#glow)"/>
+            <circle cx="38" cy="40" r="9" fill="#fff" opacity="0.3"/>
+          </g>
+          <!-- Texto "Flor de Íris" -->
+          <text x="80" y="38" font-family="'Playfair Display', serif" font-size="32" font-weight="700" fill="url(#logoGradient)" filter="url(#glow)">Flor de</text>
+          <text x="80" y="68" font-family="'Playfair Display', serif" font-size="40" font-weight="800" fill="url(#logoGradient)" letter-spacing="2">ÍRIS</text>
+          <!-- Detalhe decorativo -->
+          <path d="M 200 48 Q 210 38, 220 48 Q 210 58, 200 48" fill="url(#petalGradient)" opacity="0.6"/>
+          <circle cx="230" cy="48" r="4" fill="#FBBF24"/>
+        </svg>
+      </a>
+
+      <div class="header-search" aria-label="Buscar produtos">
+        <form class="header-search-form" action="produtos.html" method="get" role="search">
+          <svg class="header-search-icon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2" />
+            <path d="M20 20l-3.5-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+          <input class="header-search-input" type="search" name="q" placeholder="Buscar produtos…" autocomplete="off">
+          <button class="header-search-btn" type="submit">Buscar</button>
+        </form>
+      </div>
+      <nav>
+        <a href="index.html">Início</a>
+        <a href="produtos.html">Produtos</a>
+        <a href="index.html#sobre">Sobre</a>
+        <a href="carrinho.html" class="nav-cart">Carrinho <span id="carrinho-count-header" class="carrinho-count">0</span></a>
+        <a href="perfil.html" class="active">Perfil</a>
+        <a href="#" id="btn-usuario" class="nav-user">Entrar</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="perfil-container">
+    <!-- Cabeçalho do Perfil -->
+    <div class="perfil-header">
+      <div class="perfil-foto" id="perfil-foto-header">
+      </div>
+      <div class="perfil-info">
+        <h1 id="perfil-nome">Carregando...</h1>
+        <p>@<span id="perfil-usuario">...</span></p>
+        <p>Membro desde <span id="perfil-data">...</span></p>
+        <div class="perfil-badges">
+          <span class="badge">Cliente</span>
+          <span class="badge" id="badge-pedidos">0 Pedidos</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Abas -->
+    <div class="perfil-tabs">
+      <div class="perfil-tab active" onclick="trocarTab(event, 'informacoes')">Informações pessoais</div>
+      <div class="perfil-tab" onclick="trocarTab(event, 'endereco')">
+        Endereço
+      </div>
+      <div class="perfil-tab" onclick="trocarTab(event, 'pedidos')">
+        Meus pedidos
+      </div>
+      <div class="perfil-tab" onclick="trocarTab(event, 'seguranca')">
+        Segurança
+      </div>
+      <div class="perfil-tab" onclick="trocarTab(event, 'privacidade')">
+        Privacidade
+      </div>
+    </div>
+
+    <!-- Conteúdo: Informações Pessoais -->
+    <div id="tab-informacoes" class="tab-content active">
+      <div class="info-card">
+        <h3>Dados pessoais</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <label>Nome Completo</label>
+            <div class="value" id="info-nome">-</div>
+          </div>
+          <div class="info-item">
+            <label>Nome de Usuário</label>
+            <div class="value" id="info-usuario">-</div>
+          </div>
+          <div class="info-item">
+            <label>CPF</label>
+            <div class="value" id="info-cpf">-</div>
+          </div>
+          <div class="info-item">
+            <label>Data de Cadastro</label>
+            <div class="value" id="info-cadastro">-</div>
+          </div>
+        </div>
+        <div class="actions-row">
+          <button class="btn-editar" type="button" onclick="abrirEdicaoDados()">Editar nome</button>
+        </div>
+
+        <form id="form-editar-dados" class="edit-form" onsubmit="salvarEdicaoDados(event)">
+          <div class="form-group">
+            <label for="editar-nome">Nome completo</label>
+            <input type="text" id="editar-nome" required placeholder="Seu nome completo" autocomplete="name">
+            <p class="muted" style="margin-top: 8px;">O CPF e o usuário não podem ser alterados.</p>
+          </div>
+          <div class="actions-row">
+            <button type="submit" class="btn-editar">Salvar</button>
+            <button type="button" class="btn-secundario" onclick="cancelarEdicaoDados()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="info-card">
+        <h3>Foto de perfil</h3>
+        <div style="display: flex; align-items: center; gap: 30px;">
+          <div class="perfil-foto" id="perfil-foto-preview" style="width: 100px; height: 100px; font-size: 40px;">
+          </div>
+          <div>
+            <button class="btn-editar" onclick="document.getElementById('upload-foto').click()">
+              Alterar foto
+            </button>
+            <input type="file" id="upload-foto" accept="image/*" style="display: none" onchange="alterarFoto(event)">
+            <p style="margin: 10px 0 0 0; color: #666; font-size: 0.9em;">Tamanho máximo: 2MB</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Conteúdo: Endereço -->
+    <div id="tab-endereco" class="tab-content">
+      <div class="info-card">
+        <h3>Endereço de entrega</h3>
+        <div class="info-grid">
+          <div class="info-item" style="grid-column: 1 / -1;">
+            <label>Endereço</label>
+            <div class="value" id="end-endereco">-</div>
+          </div>
+          <div class="info-item">
+            <label>CEP</label>
+            <div class="value" id="end-cep">-</div>
+          </div>
+          <div class="info-item">
+            <label>Cidade</label>
+            <div class="value" id="end-cidade">-</div>
+          </div>
+          <div class="info-item">
+            <label>UF</label>
+            <div class="value" id="end-uf">-</div>
+          </div>
+          <div class="info-item">
+            <label>Complemento</label>
+            <div class="value" id="end-complemento">-</div>
+          </div>
+        </div>
+        <div class="actions-row">
+          <button class="btn-editar" type="button" onclick="abrirEdicaoEndereco()">Editar endereço</button>
+        </div>
+
+        <form id="form-editar-endereco" class="edit-form" onsubmit="salvarEdicaoEndereco(event)">
+          <div class="info-grid">
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label for="editar-endereco">Endereço</label>
+              <input type="text" id="editar-endereco" required placeholder="Rua, número, bairro" autocomplete="street-address">
+            </div>
+            <div class="form-group">
+              <label for="editar-cep">CEP</label>
+              <input type="text" id="editar-cep" required placeholder="00000-000" maxlength="9" inputmode="numeric" autocomplete="postal-code">
+            </div>
+            <div class="form-group">
+              <label for="editar-cidade">Cidade</label>
+              <input type="text" id="editar-cidade" required placeholder="Sua cidade" autocomplete="address-level2">
+            </div>
+            <div class="form-group">
+              <label for="editar-uf">UF</label>
+              <input type="text" id="editar-uf" required placeholder="SP" maxlength="2" style="text-transform: uppercase;" autocomplete="address-level1">
+            </div>
+            <div class="form-group">
+              <label for="editar-complemento">Complemento</label>
+              <input type="text" id="editar-complemento" placeholder="Apto, bloco, etc (opcional)">
+            </div>
+          </div>
+          <div class="actions-row">
+            <button type="submit" class="btn-editar">Salvar</button>
+            <button type="button" class="btn-secundario" onclick="cancelarEdicaoEndereco()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Conteúdo: Meus Pedidos -->
+    <div id="tab-pedidos" class="tab-content">
+      <div class="info-card">
+        <h3>Histórico de pedidos</h3>
+        <div id="lista-pedidos-perfil">
+          <p style="text-align: center; color: #999; padding: 40px;">Você ainda não fez nenhum pedido.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Conteúdo: Segurança -->
+    <div id="tab-seguranca" class="tab-content">
+      <div class="info-card">
+        <h3>Alterar senha</h3>
+        <form onsubmit="alterarSenha(event)">
+          <div class="form-group">
+            <label>Senha Atual</label>
+            <input type="password" id="senha-atual" required>
+          </div>
+          <div class="form-group">
+            <label>Nova Senha</label>
+            <input type="password" id="senha-nova" required minlength="6">
+          </div>
+          <div class="form-group">
+            <label>Confirmar Nova Senha</label>
+            <input type="password" id="senha-confirma" required minlength="6">
+          </div>
+          <button type="submit" class="btn-editar">Alterar senha</button>
+        </form>
+      </div>
+
+      <div class="info-card">
+        <h3>Sair da conta</h3>
+        <p style="color: #666; margin-bottom: 20px;">Deseja sair da sua conta?</p>
+        <button class="btn-secundario" onclick="fazerLogout()">Sair</button>
+      </div>
+    </div>
+
+    <!-- Conteúdo: Privacidade -->
+    <div id="tab-privacidade" class="tab-content">
+      <div class="info-card">
+        <h3>Configurações de privacidade</h3>
+        
+        <div class="privacidade-item">
+          <div class="privacidade-info">
+            <h4>Permitir notificações de pedidos</h4>
+            <p>Receba atualizações sobre o status dos seus pedidos</p>
+          </div>
+          <div class="toggle-switch active" onclick="togglePrivacidade(this, 'notificacoes')"></div>
+        </div>
+
+        <div class="privacidade-item">
+          <div class="privacidade-info">
+            <h4>Permitir emails promocionais</h4>
+            <p>Receba ofertas exclusivas e novidades por email</p>
+          </div>
+          <div class="toggle-switch" onclick="togglePrivacidade(this, 'emails')"></div>
+        </div>
+
+        <div class="privacidade-item">
+          <div class="privacidade-info">
+            <h4>Salvar histórico de navegação</h4>
+            <p>Melhorar recomendações baseadas nos produtos visualizados</p>
+          </div>
+          <div class="toggle-switch active" onclick="togglePrivacidade(this, 'historico')"></div>
+        </div>
+
+        <div class="privacidade-item">
+          <div class="privacidade-info">
+            <h4>Compartilhar dados para análise</h4>
+            <p>Ajudar a melhorar nossos serviços (dados anônimos)</p>
+          </div>
+          <div class="toggle-switch" onclick="togglePrivacidade(this, 'analise')"></div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h3>Excluir conta</h3>
+        <p style="color: #666; margin-bottom: 15px;">
+          Esta ação é irreversível. Todos os seus dados serão permanentemente excluídos.
+        </p>
+        <button class="btn-secundario btn-danger" onclick="excluirConta()">
+          Excluir minha conta
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js?v=20251231-3"></script>
+  <script src="js/rastreio.js?v=20251231-3"></script>
+  <script src="js/perfil.js?v=20251231-3"></script>
+  <script src="js/script.js?v=20251231-3"></script>
+</body>
+</html>

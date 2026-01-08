@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento - Flor de Íris</title>
+    <link rel="stylesheet" href="css/style.css?v=20251231-3">
+</head>
+<body>
+
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <a href="index.html" class="logo-container" title="Voltar ao início" style="margin-left:0;">
+        <svg class="logo-svg" width="270" height="80" viewBox="0 0 270 80" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#6B46C1;stop-opacity:1" />
+              <stop offset="50%" style="stop-color:#8B5CF6;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#A78BFA;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <text x="10" y="35" font-family="'Playfair Display', serif" font-size="28" font-weight="800" fill="url(#logoGradient)" data-site-nome-loja>Flor de Íris</text>
+        </svg>
+      </a>
+
+      <div class="header-search" aria-label="Buscar produtos">
+        <form class="header-search-form" action="produtos.html" method="get" role="search">
+          <svg class="header-search-icon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2" />
+            <path d="M20 20l-3.5-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+          <input class="header-search-input" type="search" name="q" placeholder="Buscar produtos…" autocomplete="off">
+          <button class="header-search-btn" type="submit">Buscar</button>
+        </form>
+      </div>
+
+      <nav>
+        <a href="index.html">Início</a>
+        <a href="produtos.html">Produtos</a>
+        <a href="index.html#sobre">Sobre</a>
+        <a href="carrinho.html" class="nav-cart carrinho-link">Carrinho <span id="carrinho-count-header" class="carrinho-count">0</span></a>
+        <a href="#" id="btn-usuario" class="nav-user">Entrar</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Container Principal -->
+  <div class="pagamento-container">
+    <div class="pagamento-header">
+      <h1>Finalizar pagamento</h1>
+      <span class="status-badge" id="status-badge">Aguardando pagamento</span>
+    </div>
+
+    <!-- Resumo do Pedido -->
+    <div class="resumo-pedido">
+      <h3>Resumo do pedido</h3>
+      <div id="itens-lista"></div>
+      <div class="totais">
+        <div class="total-linha">
+          <span>Subtotal:</span>
+          <span id="subtotal-pag">R$ 0,00</span>
+        </div>
+        <div class="total-linha" id="desconto-linha" style="display: none; color: #4CAF50;">
+          <span>Desconto:</span>
+          <span id="desconto-pag">R$ 0,00</span>
+        </div>
+        <div class="total-linha" id="frete-linha" style="display: none;">
+          <span>Frete:</span>
+          <span id="frete-pag">R$ 0,00</span>
+        </div>
+        <div class="total-linha total-final">
+          <span>TOTAL:</span>
+          <span id="total-pag">R$ 0,00</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Observação do Pedido -->
+    <div class="observacao-pagamento" style="margin: 32px 0 24px 0;">
+      <label for="observacao-pedido" style="font-weight:600;font-size:1.08rem;display:block;margin-bottom:8px;color:#b91c5c;">Observação do pedido</label>
+      <textarea id="observacao-pedido" rows="2" placeholder="Ex: Deixar na portaria, presente, etc." style="width:100%;max-width:520px;padding:12px 14px;border-radius:12px;border:1.5px solid #e5e7eb;font-size:1.08rem;resize:vertical;box-shadow:0 2px 8px rgba(0,0,0,0.04);"></textarea>
+      <div style="font-size:0.95em;color:#888;margin-top:4px;">Essas informações serão enviadas junto ao seu pedido.</div>
+    </div>
+    <!-- PIX -->
+    <div class="pix-section">
+      <h3>Pague com PIX</h3>
+      <p>Escaneie o QR Code ou copie a chave PIX abaixo:</p>
+      
+      <div class="qr-code" id="qr-container">
+        <img id="qr-code-img" class="pay-qr-img" src="" alt="QR Code PIX">
+      </div>
+      
+      <p class="pay-valor">Valor: <span id="valor-qr-code">R$ 0,00</span></p>
+
+      <p class="pay-copy-code-wrap">
+        <button class="copiar-btn pay-copy-code-btn" onclick="copiarCodigoPix()">Copiar código PIX (copia e cola)</button>
+      </p>
+
+      <div class="pix-chave">
+        <span id="chave-pix">rodolfo.rags1@gmail.com</span>
+        <button class="copiar-btn" onclick="copiarChavePix()">Copiar</button>
+      </div>
+
+      <p style="margin-top: 15px; font-size: 0.95em; opacity: 0.95;">
+        Chave PIX: <strong>E-mail</strong>
+      </p>
+    </div>
+
+    <!-- Dados de Entrega -->
+    <div class="resumo-pedido">
+      <h3>Dados de entrega</h3>
+      <div id="dados-usuario" class="pay-delivery-box">
+        <p><strong>Nome:</strong> <span id="usuario-nome">-</span></p>
+        <p><strong>CPF:</strong> <span id="usuario-cpf">-</span></p>
+        <p><strong>Endereço:</strong> <span id="usuario-endereco">-</span></p>
+        <p><strong>CEP:</strong> <span id="usuario-cep">-</span></p>
+        <p><strong>Cidade/UF:</strong> <span id="usuario-cidade">-</span></p>
+        <p style="font-size: 0.85em; color: #666; margin-top: 10px;"><a href="login.html" class="pay-delivery-edit">Editar dados do perfil</a></p>
+      </div>
+    </div>
+
+    <!-- Instruções -->
+    <div class="instrucoes" id="pix-instrucoes">
+      <h4>Como pagar:</h4>
+      <ol>
+        <li><strong>Abra o app do seu banco</strong> e entre no PIX</li>
+        <li><strong>Escaneie o QR Code</strong> ou copie a chave PIX acima</li>
+        <li><strong>Confira o valor total</strong> do pedido</li>
+        <li><strong>Confirme o pagamento</strong> no app do seu banco</li>
+        <li><strong>Anexe o comprovante</strong> abaixo e clique em enviar</li>
+      </ol>
+    </div>
+
+    <!-- Upload de Comprovante -->
+    <div class="comprovante-section pay-proof-section">
+      <h4>Anexar comprovante de pagamento</h4>
+      <input type="file" id="comprovante-input" accept="image/*,application/pdf" style="display: none;" onchange="previewComprovante(event)">
+
+      <div
+        id="comprovante-dropzone"
+        role="button"
+        tabindex="0"
+        onclick="document.getElementById('comprovante-input').click()"
+        onkeydown="if(event.key==='Enter'||event.key===' ') { event.preventDefault(); document.getElementById('comprovante-input').click(); }"
+        class="pay-dropzone"
+      >
+        <div class="pay-dropzone-row">
+          <div class="pay-dropzone-icon" aria-hidden="true"></div>
+          <div style="flex:1;min-width:220px;">
+            <div class="pay-dropzone-title">Clique para selecionar</div>
+            <div class="pay-dropzone-sub">ou arraste e solte a imagem do comprovante aqui</div>
+          </div>
+          <div class="pay-dropzone-types">(JPG/PNG/WebP/PDF)</div>
+        </div>
+        <div class="pay-dropzone-note">
+          Dica: fotos muito grandes são comprimidas automaticamente.
+        </div>
+      </div>
+
+      <div id="comprovante-preview" class="pay-preview" style="display: none;">
+        <p class="pay-preview-title">Comprovante anexado:</p>
+        <div id="comprovante-meta" class="pay-preview-meta"></div>
+        <img id="preview-img" class="pay-preview-img" />
+        <embed id="preview-pdf" type="application/pdf" class="pay-preview-pdf" />
+        <button class="btn-pagamento btn-danger pay-preview-remove" onclick="removerComprovante()">
+          Remover
+        </button>
+      </div>
+    </div>
+
+    <!-- Ações -->
+    <div class="acoes-pagamento">
+      <button class="btn-pagamento btn-voltar" onclick="window.location.href='carrinho.html'">
+        ← Voltar ao Carrinho
+      </button>
+      <button class="btn-pagamento btn-primary" onclick="enviarComprovante()" id="btn-enviar-comprovante">
+        Enviar pedido
+      </button>
+    </div>
+  </div>
+
+  <!-- Mensagem de Copiado -->
+  <div class="copiado-msg" id="copiado-msg">
+    Chave PIX copiada!
+  </div>
+
+  <script src="js/config.js?v=20251231-3"></script>
+  <script src="js/rastreio.js?v=20251231-3"></script>
+  <script src="js/pagamento.js?v=20251231-3"></script>
+  <script src="js/script.js?v=20251231-3"></script>
+</body>
+</html>

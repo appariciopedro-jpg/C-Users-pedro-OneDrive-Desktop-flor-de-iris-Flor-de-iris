@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login / Registro - Flor de Íris</title>
+  <link rel="stylesheet" href="css/style.css?v=20251231-3">
+</head>
+<body>
+
+  <div class="auth-container">
+    <div class="auth-box">
+      <div class="auth-header">
+        <h1><span data-site-nome-loja>Flor de Íris</span></h1>
+        <p>Sabonetes Artesanais</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="trocarAba('login')">Entrar</button>
+        <button class="auth-tab" onclick="trocarAba('registro')">Cadastrar</button>
+      </div>
+
+      <div class="auth-content">
+        <div id="mensagem" class="mensagem"></div>
+
+        <!-- FORMULÁRIO DE LOGIN -->
+        <form id="form-login" class="auth-form active" novalidate>
+          <div class="form-group">
+            <label>Nome de Usuário ou CPF</label>
+            <input type="text" id="login-usuario" required placeholder="Digite seu usuário ou CPF" autocomplete="username">
+          </div>
+
+          <div class="form-group">
+            <label>Senha</label>
+            <div class="password-row">
+              <input type="password" id="login-senha" required placeholder="Digite sua senha" autocomplete="current-password">
+              <button type="button" class="btn-toggle-senha" id="toggle-login-senha" onclick="toggleSenha('login-senha','toggle-login-senha')">Mostrar</button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit" id="btn-login">Entrar</button>
+        </form>
+
+        <!-- FORMULÁRIO DE REGISTRO -->
+        <form id="form-registro" class="auth-form" novalidate>
+          <div class="foto-perfil-container">
+            <div class="foto-preview" id="foto-preview">
+            </div>
+            <input type="file" id="foto-input" accept="image/*" style="display:none" onchange="previewFoto(event)">
+            <button type="button" class="btn-foto" onclick="document.getElementById('foto-input').click()">
+              Adicionar foto (opcional)
+            </button>
+          </div>
+
+          <div class="form-group">
+            <label>Nome Completo *</label>
+            <input type="text" id="reg-nome" required placeholder="Seu nome completo">
+          </div>
+
+          <div class="form-group">
+            <label>Nome de Usuário *</label>
+            <input type="text" id="reg-usuario" required placeholder="Escolha um nome de usuário">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>CPF *</label>
+              <input type="text" id="reg-cpf" required placeholder="000.000.000-00" maxlength="14" inputmode="numeric" autocomplete="off">
+            </div>
+            <div class="form-group">
+              <label>CEP *</label>
+              <input type="text" id="reg-cep" required placeholder="00000-000" maxlength="9" inputmode="numeric" autocomplete="postal-code">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Endereço Completo *</label>
+            <input type="text" id="reg-endereco" required placeholder="Rua, Número, Bairro">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Cidade *</label>
+              <input type="text" id="reg-cidade" required placeholder="Sua cidade">
+            </div>
+            <div class="form-group">
+              <label>UF *</label>
+              <input type="text" id="reg-uf" required placeholder="SP" maxlength="2" style="text-transform: uppercase;">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Complemento</label>
+            <input type="text" id="reg-complemento" placeholder="Apto, Bloco, etc (opcional)">
+          </div>
+
+          <div class="form-group">
+            <label>Senha *</label>
+            <div class="password-row">
+              <input type="password" id="reg-senha" required placeholder="Crie uma senha" minlength="6" autocomplete="new-password">
+              <button type="button" class="btn-toggle-senha" id="toggle-reg-senha" onclick="toggleSenha('reg-senha','toggle-reg-senha')">Mostrar</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Confirmar Senha *</label>
+            <div class="password-row">
+              <input type="password" id="reg-confirma-senha" required placeholder="Confirme sua senha" autocomplete="new-password">
+              <button type="button" class="btn-toggle-senha" id="toggle-reg-confirma" onclick="toggleSenha('reg-confirma-senha','toggle-reg-confirma')">Mostrar</button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit" id="btn-registro">Criar conta</button>
+        </form>
+
+        <div class="link-voltar">
+          <a href="index.html">← Voltar para o site</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js?v=20251231-3"></script>
+  <script src="js/auth.js?v=20251231-3"></script>
+</body>
+</html>

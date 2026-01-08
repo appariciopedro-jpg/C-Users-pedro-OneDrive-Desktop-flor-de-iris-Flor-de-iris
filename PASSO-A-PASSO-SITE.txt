@@ -1,0 +1,120 @@
+PASSO A PASSO – COMO FUNCIONA O SITE FLOR DE ÍRIS
+
+1) VISÃO GERAL
+- O site é uma lojinha virtual de sabonetes artesanais.
+- Ele roda em um servidor Node/Express (server.js) na porta 3001 (ou na porta definida em PORT).
+- As páginas HTML ficam na pasta public/ (index, produtos, carrinho, pagamento, painel admin etc.).
+- As informações dos pedidos ficam salvas em data/pedidos.json no servidor (e também em localStorage como backup em algumas partes).
+
+2) PÁGINA INICIAL (index.html)
+- Mostra o cabeçalho com logo, menu (Início, Produtos, Sobre, Carrinho, Entrar) e botão de WhatsApp.
+- Seções principais:
+  - Hero: apresentação da marca e botão “Explorar produtos” que leva para produtos.html.
+  - Produtos em Destaque: área onde o JavaScript pode mostrar alguns itens populare (carregados de localStorage se houver produtos cadastrados pelo admin).
+  - Guias e conteúdo, benefícios, ingredientes, processo de fabricação, depoimentos e CTA final para ver produtos ou falar no WhatsApp.
+- Scripts principais carregados na home:
+  - js/config.js: configurações gerais do site (nome, WhatsApp, PIX etc.).
+  - js/script.js: comportamentos da interface geral.
+  - js/rastreio.js e js/suporte.js: suporte, rastreio e outras funções auxiliares.
+
+3) PÁGINA DE PRODUTOS (produtos.html)
+- Mostra o cabeçalho igual ao da home (logo, menu e busca no topo).
+- Logo abaixo vem:
+  - Seção “Explore por Categoria”: botões de categoria (Todos, Hidratantes, Esfoliantes, Aromáticos, Veganos, Premium).
+  - Seção com filtros e lista de produtos:
+    - Filtros: busca por nome, faixa de preço mínima/máxima e ordenação (relevância, menor/maior preço, A–Z, Z–A).
+    - Sidebar com resumo do carrinho e atalho “Ver Carrinho”.
+    - Área principal com os cards de produtos.
+- Como os produtos são carregados:
+  - O arquivo js/produtos.js lê do localStorage a chave "produtos".
+  - Cada produto tem nome, preço, descrição, imagem e tags.
+  - O script aplica filtros, categoria e ordenação e renderiza os cards na grade.
+  - Cada card tem botão “Adicionar ao carrinho” que grava o produto em localStorage na chave "carrinho".
+
+4) CARRINHO (carrinho.html + js/carrinho.js)
+- O carrinho lê os itens gravados em localStorage na chave "carrinho".
+- O arquivo js/carrinho.js:
+  - Agrupa itens iguais para exibir quantidade.
+  - Calcula subtotal dos produtos, aplica cupons de desconto e calcula frete.
+  - Cupons disponíveis (exemplos): IRIS10, PRIMEIRA, FRETE5, VIP20.
+  - Calcula frete com base no CEP digitado (simulação por região do Brasil).
+- O usuário pode:
+  - Aumentar/diminuir quantidades ou remover itens.
+  - Limpar todo o carrinho.
+  - Aplicar cupom.
+  - Calcular frete aproximado.
+- Quando clica em “Finalizar pedido”:
+  - O script monta um objeto com itens, subtotal, desconto, frete e total.
+  - Salva esses dados em sessionStorage na chave "dadosPagamento".
+  - Redireciona o usuário para pagamento.html.
+
+5) LOGIN E CONTA (login.html, perfil.html, auth.js)
+- Os usuários são armazenados em localStorage na chave "usuarios".
+- Para finalizar o pedido, é obrigatório estar logado:
+  - Se o usuário tentar acessar pagamento.html sem estar logado, js/pagamento.js redireciona para login.html.
+- Após login, algumas páginas (perfil, painel) podem usar os dados do usuário logado (armazenados em localStorage na chave "usuarioLogado").
+
+6) PÁGINA DE PAGAMENTO (pagamento.html + js/pagamento.js)
+- Logo no carregamento, js/pagamento.js:
+  - Verifica se há um "usuarioLogado" em localStorage.
+  - Verifica se existem dados de pedido em sessionStorage ("dadosPagamento").
+  - Se não houver dados, redireciona de volta para carrinho.html.
+- O que é exibido ao cliente:
+  - Lista de itens com nome, quantidade e subtotal por item.
+  - Subtotal, desconto (se tiver cupom), frete e total final.
+  - Dados do comprador (nome, CPF, endereço, CEP, cidade/UF) buscados de localStorage (usuarios).
+  - QR Code PIX com o valor total do pedido.
+- Lado do servidor (server.js):
+  - Quando a tela de pagamento é carregada, o front pode enviar um pedido base para a API salvar em data/pedidos.json com status "Aguardando Pagamento".
+  - O cliente faz o pagamento via PIX (fora do site, usando o app do banco).
+  - Em outra etapa (upload de comprovante ou painel admin), o status pode ser atualizado.
+
+7) SALVANDO O PEDIDO NO SERVIDOR (server.js)
+- O servidor usa Express e grava pedidos em data/pedidos.json.
+- Há rotas de API para:
+  - Criar ou atualizar pedidos.
+  - Registrar comprovante de pagamento (upload de PDF ou imagem, salvando em public/uploads/comprovantes).
+- A função writePedidosSafe() garante que o arquivo pedidos.json seja criado/atualizado com segurança.
+
+8) PAINEL ADMIN E PAINEL DO CLIENTE (admin.html, painel.html, painel.js, admin.js)
+- Painel do cliente (painel.html):
+  - Permite ao cliente ver seus pedidos, status e detalhes.
+  - Lê os pedidos filtrando pelo usuário logado.
+- Painel admin (admin.html):
+  - Mostra a lista de todos os pedidos salvos em data/pedidos.json.
+  - Permite alterar o status (Aguardando pagamento, Pago, Enviado, Entregue etc.) e cadastrar/editar produtos.
+  - Os produtos cadastrados pelo admin são salvos em localStorage na chave "produtos", que é usada pela página produtos.html.
+
+9) CONFIRMAÇÃO E RASTREIO (confirmacao.html, rastreio.js, confirmacao.js)
+- Após o pagamento ser confirmado (manualmente pelo admin ao ver o comprovante), o status do pedido é atualizado.
+- A página confirmacao.html pode exibir um resumo do pedido finalizado.
+- O arquivo js/rastreio.js contém funções para buscar status de entrega (pode usar API dos Correios ou simulação).
+
+10) SEGURANÇA E LIMITES (server.js)
+- Há um sistema de rate limit básico por IP para evitar abuso:
+  - Limita o número de requisições por minuto.
+  - Em caso de excesso, o IP é bloqueado temporariamente.
+- Headers de segurança configurados:
+  - X-Frame-Options, X-Content-Type-Options, X-XSS-Protection, Referrer-Policy e Content-Security-Policy.
+- Em ambiente de desenvolvimento, o servidor desabilita cache de HTML/CSS/JS para ver as mudanças na hora.
+
+11) COMO É O FLUXO COMPLETO PARA O CLIENTE
+1. Acessa a home (index.html) e conhece os produtos.
+2. Vai para produtos.html para filtrar e escolher sabonetes.
+3. Clica em “Adicionar ao carrinho” em cada produto desejado.
+4. Abre carrinho.html, revisa os itens, aplica cupom e calcula o frete.
+5. Clica em “Finalizar pedido” → dados vão para sessionStorage.
+6. Faz login (se ainda não estiver logado).
+7. Vai para pagamento.html, confere valores e faz o pagamento via PIX usando o QR Code.
+8. Admin confere o comprovante no painel/admin e muda o status do pedido.
+9. Cliente pode acompanhar pelo painel do cliente ou pela página de confirmação/rastreio.
+
+12) COMO LIGAR O SITE LOCALMENTE
+- Pré-requisito: ter Node.js 18 ou superior instalado.
+- Passos:
+  1. Abrir o terminal na pasta Flor-de-iris.
+  2. Rodar: npm install (se ainda não tiver rodado).
+  3. Depois: npm start.
+  4. Abrir o navegador em http://localhost:3001 (ou na porta indicada no log do terminal).
+
+Esse arquivo é um resumo para você lembrar como o fluxo do site funciona, tanto para o cliente quanto para o funcionamento interno (Node + localStorage).

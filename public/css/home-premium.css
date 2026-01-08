@@ -1,0 +1,330 @@
+/* Logo maior e mais premium */
+.page-home .logo-container {
+  display: flex;
+  align-items: center;
+  height: 90px;
+  min-width: 260px;
+  max-width: 350px;
+}
+
+.page-home .logo-svg {
+  width: 100% !important;
+  height: 90px !important;
+  max-width: 350px;
+  min-width: 220px;
+  display: block;
+}
+/* Agrupamento dos ícones do topo: lupa, perfil, WhatsApp */
+.page-home .header-icons {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-left: 24px;
+}
+
+.page-home .header-icons a {
+  display: flex;
+  align-items: center;
+  font-size: 1.08rem;
+  text-decoration: none;
+  color: #222;
+  transition: color 0.2s;
+  background: none;
+  border: none;
+  padding: 0 8px;
+  border-radius: 20px;
+  height: 44px;
+}
+
+.page-home .header-icons a:hover {
+  color: #b91c5c;
+  background: rgba(255,255,255,0.18);
+}
+
+.page-home .header-search-lupa svg {
+  width: 28px;
+  height: 28px;
+}
+
+.page-home .nav-user {
+  font-weight: 500;
+  font-size: 1.13rem;
+}
+
+.page-home .nav-whatsapp svg {
+  margin-right: 6px;
+  width: 28px;
+  height: 28px;
+}
+
+.page-home .nav-whatsapp span {
+  font-size: 1.08rem;
+  font-weight: 500;
+}
+.page-home .header-search-lupa svg,
+.page-home .nav-user svg,
+.page-home .nav-whatsapp svg {
+  width: 28px !important;
+  height: 28px !important;
+}
+
+.page-home .nav-user,
+.page-home .nav-whatsapp {
+  font-size: 1.08rem;
+  height: 44px;
+  padding: 0 14px;
+  gap: 8px;
+}
+
+.page-home .header-search,
+.page-home .nav-user,
+.page-home .nav-whatsapp {
+  margin: 0 0 0 0;
+}
+
+.page-home .header-content {
+  gap: 32px;
+}
+
+.page-home .header nav {
+  gap: 24px;
+}
+/* Header/topo organizado e alinhado */
+.page-home .header-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 32px;
+  padding: 0 18px 0 0;
+  min-height: 90px;
+  flex-wrap: wrap;
+}
+
+.page-home .header-search {
+  margin-right: 18px;
+}
+
+.page-home .header nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  min-width: 0 !important;
+}
+
+.page-home .nav-user,
+.page-home .nav-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1rem;
+  padding: 0 10px;
+  border-radius: 20px;
+  background: none;
+  border: none;
+  transition: background 0.18s;
+  height: 40px;
+}
+
+.page-home .nav-user:hover,
+.page-home .nav-whatsapp:hover {
+  background: rgba(255,255,255,0.18);
+}
+
+.page-home .nav-whatsapp svg {
+  margin-right: 2px;
+}
+
+.page-home .header-search-lupa {
+  background: rgba(255,255,255,0.7) !important;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: background 0.2s;
+}
+.page-home .header-search-lupa:hover {
+  background: #fff !important;
+}
+/* Home Premium overrides (somente na página inicial) */
+
+:root{
+  /* Tema rosa claro/escuro para a home */
+  --home-bg: linear-gradient(180deg, #ffe4f0 0%, #ffd1e8 40%, #ffb3d9 100%);
+  --home-surface: rgba(255, 255, 255, 0.92);
+  --home-text: #3b0b22;
+  --home-muted: #8b4764;
+  --home-border: rgba(219, 39, 119, 0.16);
+  --home-shadow: 0 18px 55px rgba(219, 39, 119, 0.22);
+  --home-accent: #db2777; /* rosa escuro */
+}
+
+
+body.page-home {
+  background: var(--home-bg) !important;
+  color: var(--home-text);
+}
+
+.page-home main#conteudo > section{
+  scroll-margin-top: 96px;
+}
+
+/* Header mais clean (premium) */
+.page-home .header{
+  background: rgba(255, 255, 255, 0.88) !important;
+  border-bottom: 1px solid var(--home-border);
+  box-shadow: 0 10px 30px rgba(17, 24, 39, 0.06);
+  backdrop-filter: blur(10px);
+}
+
+.page-home .header nav a{
+  color: var(--home-text) !important;
+}
+
+.page-home .header nav a:hover{
+  color: var(--home-accent) !important;
+}
+
+/* Seções: remover visual “pesado” (bordas grossas/cores fortes) */
+.page-home .produtos-destaque,
+.page-home .home-editorial,
+.page-home .trust-badges,
+.page-home .beneficios,
+.page-home .ingredientes-naturais,
+.page-home .processo-fabricacao,
+.page-home .depoimentos,
+.page-home .sobre{
+  background: var(--home-surface) !important;
+  border-top: 1px solid var(--home-border) !important;
+}
+
+/* Cards: borda fina + sombra suave */
+.page-home .trust-badge,
+.page-home .editorial-card,
+.page-home .beneficio-card,
+.page-home .ingrediente-card,
+.page-home .processo-step,
+.page-home .depoimento-card{
+  background: var(--home-surface) !important;
+  border: 1px solid var(--home-border) !important;
+  box-shadow: var(--home-shadow) !important;
+}
+
+.page-home .section-subtitle,
+.page-home .hero-subhead{
+  color: var(--home-muted) !important;
+}
+
+/* Ingredientes: neutralizar gradientes muito “coloridos” embutidos */
+.page-home .ingredientes-naturais .image-circle{
+  background: radial-gradient(circle at 30% 30%, rgba(124, 58, 237, 0.18), rgba(255, 255, 255, 0.95)) !important;
+}
+
+/* CTA final: manter impacto, porém mais premium */
+.page-home .cta-section{
+  border-top: 1px solid var(--home-border) !important;
+}
+
+.page-home .cta-section h3,
+.page-home .cta-section p,
+.page-home .cta-section .newsletter-subtitle{
+  color: inherit;
+}
+
+/* CTA: visual premium (menos chamativo) */
+.page-home .cta-section{
+  background: var(--home-surface) !important;
+  color: var(--home-text) !important;
+  padding: clamp(72px, 8vw, 110px) 24px !important;
+}
+
+.page-home .cta-background-effects{
+  opacity: 0.25 !important;
+}
+
+.page-home .cta-particle{
+  filter: blur(40px) !important;
+  animation: none !important;
+  opacity: 0.25 !important;
+}
+
+.page-home .cta-badge{
+  background: rgba(124, 58, 237, 0.08) !important;
+  border: 1px solid var(--home-border) !important;
+  color: var(--home-text) !important;
+  animation: none !important;
+}
+
+.page-home .cta-badge svg{
+  animation: none !important;
+}
+
+.page-home .cta-content h3{
+  text-shadow: none !important;
+}
+
+.page-home .cta-content > p{
+  text-shadow: none !important;
+  opacity: 1 !important;
+  color: var(--home-muted) !important;
+}
+
+.page-home .cta-newsletter{
+  background: var(--home-surface) !important;
+  border: 1px solid var(--home-border) !important;
+  box-shadow: var(--home-shadow) !important;
+  backdrop-filter: none !important;
+}
+
+.page-home .cta-newsletter h4{
+  color: var(--home-text) !important;
+}
+
+.page-home .newsletter-form input{
+  background: #ffffff !important;
+  color: var(--home-text) !important;
+  border: 1px solid var(--home-border) !important;
+  backdrop-filter: none !important;
+}
+
+.page-home .newsletter-form input::placeholder{
+  color: rgba(17, 24, 39, 0.45) !important;
+}
+
+.page-home .btn-newsletter{
+  background: var(--home-text) !important;
+  color: #ffffff !important;
+  box-shadow: var(--home-shadow) !important;
+}
+
+.page-home .btn-newsletter:hover{
+  transform: translateY(-2px) !important;
+}
+
+.page-home .btn-cta,
+.page-home .btn-cta-primary{
+  background: var(--home-text) !important;
+  color: #ffffff !important;
+  box-shadow: var(--home-shadow) !important;
+}
+
+.page-home .btn-cta::before{
+  background: rgba(124, 58, 237, 0.12) !important;
+}
+
+.page-home .btn-cta-secondary{
+  background: transparent !important;
+  color: var(--home-text) !important;
+  border: 1px solid var(--home-border) !important;
+  backdrop-filter: none !important;
+}
+
+.page-home .btn-cta-secondary:hover{
+  background: var(--home-surface) !important;
+  color: var(--home-text) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: var(--home-shadow) !important;
+}

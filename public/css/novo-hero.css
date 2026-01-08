@@ -1,0 +1,252 @@
+/* ===== DESIGN PROFISSIONAL PREMIUM ===== */
+
+/* Reset e Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Hero Premium */
+.hero-premium {
+  position: relative;
+  min-height: 90vh;
+  /* acompanha o tema rosa da home */
+  background: linear-gradient(135deg, #ffe4f0 0%, #ffb3d9 40%, #db2777 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px 0 60px;
+}
+
+.hero-container-pro {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 120px;
+  align-items: center;
+}
+
+/* Conteúdo */
+.hero-content-pro {
+  max-width: 600px;
+}
+
+.hero-eyebrow {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #be185d;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeInUp 0.6s ease-out 0.2s forwards;
+}
+
+.hero-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 4.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #3b0b22;
+  margin-bottom: 32px;
+  letter-spacing: -0.02em;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.3s forwards;
+}
+
+.hero-highlight {
+  color: #fdf2f8;
+  display: block;
+  margin-top: 8px;
+}
+
+.hero-subhead {
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: #fdf2f8;
+  margin-bottom: 48px;
+  font-weight: 400;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.4s forwards;
+}
+
+/* Botões */
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.5s forwards;
+}
+
+.btn-primary-pro {
+  display: inline-block;
+  background: #be185d;
+  color: #fdf2f8;
+  padding: 16px 40px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary-pro:hover {
+  background: #9d174d;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(190, 24, 93, 0.35);
+}
+
+.btn-secondary-pro {
+  display: inline-block;
+  color: #3b0b22;
+  padding: 16px 40px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid rgba(248, 113, 170, 0.6);
+  transition: all 0.3s ease;
+}
+
+.btn-secondary-pro:hover {
+  border-color: #be185d;
+  background: rgba(255, 240, 246, 0.8);
+}
+
+/* Visual */
+.hero-visual {
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 1s ease-out 0.6s forwards;
+}
+
+.hero-image-container {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-image-container:hover {
+  transform: scale(1.02);
+}
+
+.hero-main-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Features */
+.hero-features {
+  max-width: 1400px;
+  margin: 80px auto 0;
+  padding: 0 80px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.7s forwards;
+}
+
+.feature-item {
+  text-align: center;
+}
+
+.feature-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #3b0b22;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.feature-label {
+  font-size: 0.875rem;
+  color: #8b4764;
+  font-weight: 500;
+}
+
+/* Animações */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsivo */
+@media (max-width: 1200px) {
+  .hero-container-pro {
+    grid-template-columns: 1fr;
+    gap: 60px;
+    padding: 0 40px;
+  }
+  
+  .hero-content-pro {
+    max-width: 100%;
+  }
+  
+  .hero-heading {
+    font-size: 3.5rem;
+  }
+  
+  .hero-features {
+    padding: 0 40px;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-premium {
+    padding: 80px 0 40px;
+  }
+  
+  .hero-container-pro {
+    padding: 0 24px;
+    gap: 40px;
+  }
+  
+  .hero-heading {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subhead {
+    font-size: 1.125rem;
+  }
+  
+  .hero-actions {
+    flex-direction: column;
+  }
+  
+  .btn-primary-pro,
+  .btn-secondary-pro {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .hero-features {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 0 24px;
+    margin-top: 60px;
+  }
+}

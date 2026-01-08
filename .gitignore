@@ -1,0 +1,32 @@
+# Dependencies
+package-lock.json
+
+# Environment variables
+.env
+.env.local
+
+# Logs
+node_modules/
+logs/
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary files
+tmp/
+temp/
+

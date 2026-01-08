@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1400" viewBox="0 0 2400 1400" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0616"/>
+      <stop offset="0.45" stop-color="#17122e"/>
+      <stop offset="0.78" stop-color="#2a114a"/>
+      <stop offset="1" stop-color="#0b0616"/>
+    </linearGradient>
+
+    <radialGradient id="orbViolet" cx="30%" cy="22%" r="60%">
+      <stop offset="0" stop-color="#A78BFA" stop-opacity="0.55"/>
+      <stop offset="0.5" stop-color="#8B5CF6" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="orbRose" cx="78%" cy="18%" r="55%">
+      <stop offset="0" stop-color="#F06595" stop-opacity="0.35"/>
+      <stop offset="0.55" stop-color="#CC5DE8" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="orbBlue" cx="58%" cy="88%" r="65%">
+      <stop offset="0" stop-color="#5C7CFA" stop-opacity="0.26"/>
+      <stop offset="0.55" stop-color="#339AF0" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="orbGold" cx="90%" cy="62%" r="55%">
+      <stop offset="0" stop-color="#FBBF24" stop-opacity="0.22"/>
+      <stop offset="0.6" stop-color="#F59E0B" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="soap" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F7F2FF" stop-opacity="0.95"/>
+      <stop offset="0.5" stop-color="#EDE6FF" stop-opacity="0.80"/>
+      <stop offset="1" stop-color="#D9C8FF" stop-opacity="0.70"/>
+    </linearGradient>
+
+    <linearGradient id="soapEdge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8B5CF6" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#FBBF24" stop-opacity="0.12"/>
+    </linearGradient>
+
+    <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 0.9 0" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="grain" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch" result="noise"/>
+      <feColorMatrix type="matrix" in="noise"
+        values="0 0 0 0 0
+                0 0 0 0 0
+                0 0 0 0 0
+                0 0 0 0.08 0" result="grain"/>
+      <feComposite in="grain" in2="SourceGraphic" operator="over"/>
+    </filter>
+
+    <mask id="fadeBottom">
+      <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity="1"/>
+        <stop offset="0.72" stop-color="#fff" stop-opacity="1"/>
+        <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+      </linearGradient>
+      <rect width="2400" height="1400" fill="url(#fade)"/>
+    </mask>
+  </defs>
+
+  <!-- Background -->
+  <rect width="2400" height="1400" fill="url(#bg)"/>
+
+  <!-- Ambient orbs -->
+  <circle cx="640" cy="320" r="740" fill="url(#orbViolet)"/>
+  <circle cx="1880" cy="260" r="680" fill="url(#orbRose)"/>
+  <circle cx="1380" cy="1240" r="920" fill="url(#orbBlue)"/>
+  <circle cx="2160" cy="860" r="650" fill="url(#orbGold)"/>
+
+  <!-- Subtle sparkles (static, looks like luxury dust) -->
+  <g opacity="0.35" mask="url(#fadeBottom)">
+    <g fill="#FFFFFF">
+      <circle cx="220" cy="220" r="2" opacity="0.25"/>
+      <circle cx="520" cy="140" r="1.8" opacity="0.18"/>
+      <circle cx="760" cy="260" r="1.6" opacity="0.16"/>
+      <circle cx="980" cy="120" r="2.2" opacity="0.22"/>
+      <circle cx="1240" cy="240" r="1.7" opacity="0.15"/>
+      <circle cx="1560" cy="180" r="2.0" opacity="0.20"/>
+      <circle cx="1780" cy="320" r="1.6" opacity="0.14"/>
+      <circle cx="2060" cy="210" r="2.2" opacity="0.22"/>
+      <circle cx="2320" cy="300" r="1.8" opacity="0.16"/>
+      <circle cx="360" cy="520" r="1.6" opacity="0.13"/>
+      <circle cx="680" cy="620" r="2.1" opacity="0.18"/>
+      <circle cx="1020" cy="540" r="1.7" opacity="0.14"/>
+      <circle cx="1380" cy="520" r="2.3" opacity="0.20"/>
+      <circle cx="1680" cy="580" r="1.8" opacity="0.14"/>
+      <circle cx="1960" cy="520" r="2.1" opacity="0.18"/>
+      <circle cx="2220" cy="600" r="1.7" opacity="0.13"/>
+    </g>
+  </g>
+
+  <!-- Soap silhouettes (abstract, premium) -->
+  <g filter="url(#softGlow)" opacity="0.78" mask="url(#fadeBottom)">
+    <g transform="translate(1380 820) rotate(-10)">
+      <rect x="-380" y="-170" width="760" height="340" rx="120" fill="url(#soap)"/>
+      <rect x="-380" y="-170" width="760" height="340" rx="120" fill="none" stroke="url(#soapEdge)" stroke-width="10" opacity="0.9"/>
+      <path d="M -250 40 C -120 -40, 80 -50, 240 20" fill="none" stroke="#FFFFFF" stroke-opacity="0.22" stroke-width="14" stroke-linecap="round"/>
+      <path d="M -200 90 C -80 10, 80 0, 200 70" fill="none" stroke="#FFFFFF" stroke-opacity="0.14" stroke-width="10" stroke-linecap="round"/>
+    </g>
+
+    <g transform="translate(720 1040) rotate(8)">
+      <rect x="-300" y="-140" width="600" height="280" rx="105" fill="url(#soap)" opacity="0.72"/>
+      <rect x="-300" y="-140" width="600" height="280" rx="105" fill="none" stroke="url(#soapEdge)" stroke-width="9" opacity="0.75"/>
+    </g>
+
+    <g transform="translate(1960 1080) rotate(-4)" opacity="0.65">
+      <rect x="-260" y="-120" width="520" height="240" rx="95" fill="url(#soap)"/>
+      <rect x="-260" y="-120" width="520" height="240" rx="95" fill="none" stroke="url(#soapEdge)" stroke-width="8" opacity="0.7"/>
+    </g>
+  </g>
+
+  <!-- Bubble hints -->
+  <g opacity="0.25" mask="url(#fadeBottom)">
+    <circle cx="520" cy="880" r="46" fill="#FFFFFF" fill-opacity="0.10" stroke="#FFFFFF" stroke-opacity="0.10" stroke-width="4"/>
+    <circle cx="600" cy="780" r="28" fill="#FFFFFF" fill-opacity="0.08" stroke="#FFFFFF" stroke-opacity="0.10" stroke-width="3"/>
+    <circle cx="1860" cy="720" r="44" fill="#FFFFFF" fill-opacity="0.08" stroke="#FFFFFF" stroke-opacity="0.10" stroke-width="4"/>
+    <circle cx="1980" cy="820" r="26" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFFFFF" stroke-opacity="0.10" stroke-width="3"/>
+    <circle cx="1320" cy="640" r="34" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFFFFF" stroke-opacity="0.10" stroke-width="3"/>
+  </g>
+
+  <!-- Film grain for luxury texture -->
+  <rect width="2400" height="1400" filter="url(#grain)" opacity="1"/>
+</svg>

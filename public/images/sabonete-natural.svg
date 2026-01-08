@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="600" viewBox="0 0 900 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0B0616"/>
+      <stop offset="0.55" stop-color="#141A2B"/>
+      <stop offset="1" stop-color="#0B0616"/>
+    </linearGradient>
+    <radialGradient id="orb1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(250 170) rotate(35) scale(360 280)">
+      <stop stop-color="#A78BFA" stop-opacity="0.65"/>
+      <stop offset="1" stop-color="#A78BFA" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="orb2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(690 210) rotate(-18) scale(330 270)">
+      <stop stop-color="#FBBF24" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#FBBF24" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="soap" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F6F7FB"/>
+      <stop offset="0.45" stop-color="#E7EAF3"/>
+      <stop offset="1" stop-color="#D6DBE8"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8B5CF6" stop-opacity="0.5"/>
+      <stop offset="0.55" stop-color="#6B46C1" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#0B0616" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.8 0"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="900" height="600" rx="42" fill="url(#bg)"/>
+  <path d="M0 432C170 360 290 540 470 494C640 450 720 312 900 352V600H0V432Z" fill="#FFFFFF" fill-opacity="0.03"/>
+
+  <circle cx="250" cy="170" r="210" fill="url(#orb1)"/>
+  <circle cx="690" cy="210" r="205" fill="url(#orb2)"/>
+
+  <g filter="url(#soft)">
+    <path d="M250 392C250 329 301 278 364 278H592C655 278 706 329 706 392V406C706 469 655 520 592 520H364C301 520 250 469 250 406V392Z" fill="url(#soap)"/>
+    <path d="M254 406V392C254 329 305 278 368 278H594" stroke="url(#edge)" stroke-width="10" stroke-linecap="round"/>
+    <path d="M312 434C344 402 398 380 458 374C520 368 592 384 642 412" stroke="#6B46C1" stroke-opacity="0.18" stroke-width="12" stroke-linecap="round"/>
+    <path d="M330 462C366 440 414 426 468 424C524 422 580 434 618 452" stroke="#8B5CF6" stroke-opacity="0.14" stroke-width="10" stroke-linecap="round"/>
+  </g>
+
+  <g opacity="0.9">
+    <path d="M174 318C194 294 228 286 250 306C272 326 268 360 244 386C220 412 184 422 164 400C144 378 154 342 174 318Z" fill="#A78BFA" fill-opacity="0.10" stroke="#A78BFA" stroke-opacity="0.28"/>
+    <path d="M206 330C218 314 240 312 254 326C268 340 264 362 250 378C236 394 214 398 202 386C190 374 194 346 206 330Z" fill="#FBBF24" fill-opacity="0.08" stroke="#FBBF24" stroke-opacity="0.20"/>
+  </g>
+
+  <g opacity="0.55">
+    <circle cx="742" cy="124" r="2" fill="#FBBF24"/>
+    <circle cx="774" cy="150" r="1.6" fill="#A78BFA"/>
+    <circle cx="712" cy="160" r="1.4" fill="#FFFFFF"/>
+    <circle cx="152" cy="138" r="1.4" fill="#FFFFFF"/>
+    <circle cx="126" cy="166" r="1.6" fill="#A78BFA"/>
+    <circle cx="174" cy="192" r="1.2" fill="#FBBF24"/>
+  </g>
+</svg>
