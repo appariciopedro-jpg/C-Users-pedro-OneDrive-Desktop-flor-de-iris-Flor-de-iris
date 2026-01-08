@@ -6542,8 +6542,9 @@ body.admin-dark .header-content {
 }
 
 body.admin-dark .logo-svg {
-  width: min(220px, 68vw);
-  height: auto;
+  width: 80px;
+  height: 80px;
+  border-radius: 999px;
 }
 
 body.admin-dark .header-actions {
@@ -23577,8 +23578,9 @@ footer .payment-icon:hover {
   .header-content {
     padding: 10px 12px;
     gap: 8px;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .logo-svg {
@@ -23705,6 +23707,33 @@ footer .payment-icon:hover {
   .btn-ver-carrinho,
   .btn-limpar-filtros {
     min-height: 44px;
+  }
+
+  /* Painel admin mais confortável no celular (390-414px) */
+  body.admin-dark .dashboard-hero {
+    margin: 24px 0 8px;
+    padding: 16px 12px;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  body.admin-dark .stats-container {
+    margin: 24px 0;
+    padding: 0 12px;
+    gap: 16px;
+  }
+
+  body.admin-dark .acoes-rapidas,
+  body.admin-dark .top-produtos-section,
+  body.admin-dark .atividade-recente,
+  body.admin-dark .relatorios-section,
+  body.admin-dark .config-section {
+    margin: 24px 0;
+    padding: 0 12px;
+  }
+
+  body.admin-dark .acao-btn {
+    padding: 20px 16px;
   }
 }
 
