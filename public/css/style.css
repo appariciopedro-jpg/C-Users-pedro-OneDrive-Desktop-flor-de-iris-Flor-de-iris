@@ -21822,31 +21822,42 @@ body.admin-dark #aba-produtos .admin-card--produto .preco {
 
 @media(max-width: 768px) {
   .carrinho-item {
-    grid-template-columns: 80px 1fr;
-    gap: 15px;
+    grid-template-columns: 72px 1fr;
+    gap: 10px;
+    padding: 14px 12px;
   }
   
   .item-imagem {
-    width: 80px;
-    height: 80px;
+    width: 72px;
+    height: 72px;
   }
   
   .item-quantidade {
     grid-column: 2;
+    margin-top: 6px;
   }
   
   .item-subtotal {
     grid-column: 2;
     text-align: left;
-    margin-top: 10px;
+    margin-top: 4px;
+    font-size: 0.9rem;
   }
   
   .btn-remover {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 36px;
-    height: 36px;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .carrinho-header-info h2 {
+    font-size: 1.05rem;
+  }
+
+  .lista-itens {
+    gap: 12px;
   }
   
   .carrinho-hero h1 {
@@ -23946,6 +23957,47 @@ footer .payment-icon:hover {
      width: 100%;
      max-width: 100%;
    }
+
+  /* Rastreio e cálculo de frete mais confortáveis no celular */
+  .resumo-card {
+    padding: 20px 16px;
+    border-radius: 20px;
+  }
+
+  .resumo-frete {
+    padding: 14px 12px;
+    margin: 16px 0 0;
+  }
+
+  .frete-input-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .frete-input-group input {
+    width: 100%;
+  }
+
+  .btn-calcular {
+    width: 100%;
+    height: 44px;
+  }
+
+  .resultado-frete {
+    margin-top: 10px;
+  }
+
+  .rastreio-code-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .rastreio-code-copy {
+    width: 100%;
+    text-align: center;
+  }
 
   .perfil-container {
     margin: 40px 10px 24px;
